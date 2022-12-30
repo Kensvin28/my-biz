@@ -1,9 +1,8 @@
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
-    <>
-    <p className="text-[50px]">Home</p>
-    </>
+    <LandingPage></LandingPage>
   );
 }
 
