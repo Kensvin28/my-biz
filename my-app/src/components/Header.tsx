@@ -20,16 +20,16 @@ function Header() {
                     </button>
                 </div>
                 <div className="navbar grow items-center" id="navbarSupportedContentY">
-                    <ul className="navbar-nav mr-auto flex flex-row-reverse">
-                        <li className="nav-item">
-                            <a className="nav-link block pr-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
-                               href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">Register</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link block pr-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
-                               href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">Login</a>
-                        </li>
-                    </ul>
+                    {/*<ul className="navbar-nav mr-auto flex flex-row-reverse">*/}
+                    {/*    <li className="nav-item">*/}
+                    {/*        <a className="nav-link block pr-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"*/}
+                    {/*           href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">Register</a>*/}
+                    {/*    </li>*/}
+                    {/*    <li className="nav-item">*/}
+                    {/*        <a className="nav-link block pr-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"*/}
+                    {/*           href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">Login</a>*/}
+                    {/*    </li>*/}
+                    {/*</ul>*/}
                 </div>
             </div>
         </nav>
