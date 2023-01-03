@@ -1,8 +1,10 @@
-import LandingPage from "./components/LandingPage";
+import LandingPage from "./components/landing/LandingPage";
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import RegisterPage from "./components/RegisterPage";
-import DashboardPage from "./components/DashboardPage";
+import RegisterPage from "./components/landing/RegisterPage";
+import DashboardPage from "./components/dashboard/DashboardPage";
+import TransactionPage from "./components/transaction/TransactionPage";
+import LoanPage from "./components/loan/LoanPage";
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
           <Routes>
               <Route path="/" element={<LandingPage/>}/>
               <Route path="/register" element={<RegisterPage />}/>
-              <Route path="/DashboardPage" element={<DashboardPage />}/>
+              <Route path="/dashboard" element={<DashboardPage />}/>
+              <Route path="/transaction" element={<TransactionPage />}/>
+              <Route path="/loan" element={<LoanPage />}/>
           </Routes>
       </BrowserRouter>
       </div>

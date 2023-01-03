@@ -1,7 +1,13 @@
 import React from 'react';
-import Header from "./Header";
+import Header from "../Header";
+import {Outlet, Navigate, useNavigate} from 'react-router-dom';
 
 const LoginCard = () => {
+    const navigate = useNavigate();
+    const handleAuth = () => {
+        navigate('/dashboard');
+    }
+
     return (
         // https://tailwind-elements.com/docs/standard/components/cards/3
         <div className="flex justify-center">
@@ -25,11 +31,11 @@ const LoginCard = () => {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
-      id="username"
-      placeholder="Username"/>
+                       id="username"
+                       placeholder="Username"/>
                 <input
-      type="password"
-      className="
+                    type="password"
+                    className="
         form-control
         block
         w-full
@@ -47,10 +53,10 @@ const LoginCard = () => {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
-      id="password"
-      placeholder="Password"
-    />
-                <button type="button"
+                    id="password"
+                    placeholder="Password"
+                />
+                <button onClick={handleAuth} type="submit"
                         className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Login
                 </button>
             </div>
