@@ -5,6 +5,7 @@ import RegisterPage from "./components/landing/RegisterPage";
 import DashboardPage from "./components/dashboard/DashboardPage";
 import TransactionPage from "./components/transaction/TransactionPage";
 import LoanPage from "./components/loan/LoanPage";
+import ProfilePage from "./components/profile/ProfilePage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Route path="/dashboard" element={<DashboardPage />}/>
               <Route path="/transaction" element={<TransactionPage />}/>
               <Route path="/loan" element={<LoanPage />}/>
+              <Route path="/profile" element={<ProfilePage />}/>
           </Routes>
       </BrowserRouter>
       </div>

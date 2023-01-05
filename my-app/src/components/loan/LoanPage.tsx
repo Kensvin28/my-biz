@@ -4,7 +4,7 @@ import Header from "../Header";
 function LoanPage() {
     return (
         <div>
-            <Header></Header>
+            <Header/>
             <p>Loan</p>
         </div>
     );
