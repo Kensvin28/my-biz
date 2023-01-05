@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Header from "../Header";
 import {Outlet, Navigate, useNavigate} from 'react-router-dom';
+import {LoginContext} from "../LoginContextProvider";
+import axios from 'axios';
 
 const LoginCard = () => {
     const navigate = useNavigate();
+
+    const {isAuth, setAuth}: any = useContext(LoginContext)
+    const login = async () => {
+        var result = await axios.get('http://localhost:5000/token', {withCredentials: true});
+        var { data} = result.data;
+        setAuth(data != null) //or conditional state
+    }
+    const logout = async () => {
+        await axios.get('logout')
+        setAuth(false) //or conditional state
+    }
+
     const handleAuth = () => {
         navigate('/dashboard');
     }

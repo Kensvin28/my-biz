@@ -6,7 +6,6 @@ const handleTransactionHistory = (event : React.MouseEvent<HTMLButtonElement, Mo
 function Card({text, cardTitle, image}: { text: string | null, cardTitle: string | null, image: string | undefined }) {
     return (
         <div>
-            <div className="flex justify-center m-5">
                 <div
                     className="flex flex-col w-full md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg hover:bg-gray-100 hover:shadow-lg focus:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg">
                     <img
@@ -20,7 +19,6 @@ function Card({text, cardTitle, image}: { text: string | null, cardTitle: string
                     </div>
                 </div>
             </div>
-        </div>
 
     )
 
