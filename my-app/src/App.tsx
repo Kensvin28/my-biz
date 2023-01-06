@@ -6,6 +6,7 @@ import DashboardPage from "./components/dashboard/DashboardPage";
 import TransactionPage from "./components/transaction/TransactionPage";
 import LoanPage from "./components/loan/LoanPage";
 import ProfilePage from "./components/profile/ProfilePage";
+import QrPage from "./components/qr/QRPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/transaction" element={<TransactionPage />}/>
               <Route path="/loan" element={<LoanPage />}/>
               <Route path="/profile" element={<ProfilePage />}/>
+              <Route path="/qr" element={<QrPage />}/>
           </Routes>
       </BrowserRouter>
       </div>
