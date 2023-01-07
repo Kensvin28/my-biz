@@ -17,7 +17,7 @@ export default function Example() {
     }, []);
 
     const navList = (
-        <ul className="mb-4 mt-2 flex flex-col gap-2">
+        <ul className="mb-4 mt-2 flex flex-col gap-2" style={{height: openNav ? undefined : 0}}>
             <Link to={"/dashboard"} style={{pointerEvents: openNav ? undefined : "none"}}>
                 <li className="nav-item">
                     <a className="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
