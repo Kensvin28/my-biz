@@ -56,12 +56,15 @@ function FileUpload() {
 function Documents() {
     return (
         <div>
-            <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
+            <div className="flex flex-col p-6 rounded-r-lg shadow-lg w-full mx-auto justify-center">
                 <label className="font-semibold text-gray-700 block pb-1">Upload Your Supporting Documents:</label>
                 <ul>
-                    <li>1.</li>
-                    <li>2.</li>
-                    <li>3.</li>
+                    <li>1. A copy of all the directors’ / partners’ / sole proprietor and any guarantors’ IC or passport</li>
+                    <li>2. Latest 6 months statements from all your current accounts</li>
+                    <li>3. Registration of Business: Forms A & D, or B & D (if you are a partner or a sole proprietor</li>
+                    <li>4. Audited Accounts for the last 3 years (if you are a limited company)</li>
+                    <li>5. Certified Accounts for the last 3 years (if you are a partner or sole proprietor)</li>
+                    <li>6. Valuation Report</li>
                 </ul>
                 <div className="flex">
                     <FileUpload/>

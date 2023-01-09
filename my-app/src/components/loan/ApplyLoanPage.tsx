@@ -6,16 +6,16 @@ import Declaration from "./Declaration";
 import Collateral from "./Collateral";
 import Financing from "./Financing";
 import Company from "./Company";
-import Management from "./Management";
+import {useNavigate} from "react-router-dom";
 
 //https://www.rhbgroup.com/files/business/financing/business-loan/BizPower_SME_Financing_Application_Form_.pdf
 
 function ApplyLoanPage() {
     const [currentStep, setCurrentStep] = useState(1);
+    const navigate = useNavigate();
 
     const steps = [
         "Company Information",
-        "Management",
         "Financing",
         "Collateral",
         "Documents",
@@ -27,14 +27,12 @@ function ApplyLoanPage() {
             case 1:
                 return <Company/>;
             case 2:
-                return <Management/>;
-            case 3:
                 return <Financing/>;
-            case 4:
+            case 3:
                 return <Collateral/>;
-            case 5:
+            case 4:
                 return <Documents/>;
-            case 6:
+            case 5:
                 return <Declaration/>;
             default:
         }
@@ -46,6 +44,10 @@ function ApplyLoanPage() {
         direction === "next" ? newStep++ : newStep--;
         // check if steps are within bounds
         newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
+        // submit
+        if(newStep > steps.length){
+            navigate("/loan");
+        }
     };
 
     return (
