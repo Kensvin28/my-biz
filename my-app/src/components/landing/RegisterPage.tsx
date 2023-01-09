@@ -35,7 +35,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="company_name"
-                    placeholder="Company Name"/>
+                    placeholder="Company Name"
+                    required/>
 
                 <input
                     type="text"
@@ -58,7 +59,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="business_registration_number"
-                    placeholder="Business Registration Number"/>
+                    placeholder="Business Registration Number"
+                    required/>
 
                 <input
                     type="text"
@@ -81,7 +83,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="company_address"
-                    placeholder="Company Address"/>
+                    placeholder="Company Address"
+                    required/>
 
                 <input
                     type="text"
@@ -104,7 +107,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="contact_person"
-                    placeholder="Contact Person"/>
+                    placeholder="Contact Person"
+                    required/>
 
                 <input
                     type="text"
@@ -127,7 +131,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="phone_number"
-                    placeholder="Phone Number"/>
+                    placeholder="Phone Number"
+                    required/>
 
                 <input
                     type="password"
@@ -150,7 +155,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="password"
-                    placeholder="Create Password"/>
+                    placeholder="Create Password"
+                    required/>
 
                 <input
                     type="password"
@@ -173,10 +179,11 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="confirm_password"
-                    placeholder="Confirm Password"/>
+                    placeholder="Confirm Password"
+                    required/>
 
 <input
-                    type="tel"
+                    type="password"
                     className="
         form-control
         block
@@ -196,10 +203,11 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="pin"
-                    placeholder="Create PIN"/>
-
+                    placeholder="Create PIN"
+                    required/>
+                
                 <input
-                    type="tel"
+                    type="password"
                     className="
         form-control
         block
@@ -219,7 +227,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                     id="confirm_pin"
-                    placeholder="Confirm PIN"/>
+                    placeholder="Confirm PIN"
+                    required/>
 
                 <button type="button"
                         className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Register
