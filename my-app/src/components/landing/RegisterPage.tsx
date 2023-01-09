@@ -38,7 +38,7 @@ function RegisterPage() {
                     placeholder="Company Name"/>
 
                 <input
-                    type="number"
+                    type="text"
                     className="
         form-control
         block
@@ -107,7 +107,7 @@ function RegisterPage() {
                     placeholder="Contact Person"/>
 
                 <input
-                    type="number"
+                    type="text"
                     className="
         form-control
         block
@@ -197,7 +197,7 @@ function RegisterPage() {
       "
                     id="pin"
                     placeholder="Create PIN"/>
-                
+
                 <input
                     type="tel"
                     className="
