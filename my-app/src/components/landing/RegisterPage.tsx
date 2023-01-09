@@ -268,7 +268,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="phone_number"
-                        placeholder="Phone Number" />
+                        placeholder="Phone Number"
+                        required />
 
                     <input
                         onChange={handleChangePassword}
@@ -292,7 +293,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="password"
-                        placeholder="Create Password" />
+                        placeholder="Create Password"
+                        required />
 
                     <input
                         onChange={handleChangeConfirmPassword}
@@ -316,7 +318,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="confirm_password"
-                        placeholder="Confirm Password" />
+                        placeholder="Confirm Password"
+                        required />
 
                     <input
                         onChange={handleChangePin}
@@ -340,7 +343,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="pin"
-                        placeholder="Create PIN" />
+                        placeholder="Create PIN"
+                        required />
 
                     <input
                         onChange={handleChangeConfirmPin}
@@ -364,7 +368,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="confirm_pin"
-                        placeholder="Confirm PIN" />
+                        placeholder="Confirm PIN"
+                        required />
 
                     <button type="button"
                         onClick={register} //function yg nge call resghiter
