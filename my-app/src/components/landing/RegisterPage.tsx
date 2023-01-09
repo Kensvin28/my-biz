@@ -172,7 +172,7 @@ function RegisterPage() {
       "
                         id="company_name"
                         placeholder="Company Name"
-                    />
+                        required />
 
                     <input
                         onChange={handleChangeBusNum}
@@ -196,7 +196,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="business_registration_number"
-                        placeholder="Business Registration Number" />
+                        placeholder="Business Registration Number"
+                        required />
 
                     <input
                         onChange={handleChangeinputAddress}
@@ -220,7 +221,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="company_address"
-                        placeholder="Company Address" />
+                        placeholder="Company Address"
+                        required />
 
                     <input
                         onChange={handleChangeContactPerson}
@@ -244,7 +246,8 @@ function RegisterPage() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                         id="contact_person"
-                        placeholder="Contact Person" />
+                        placeholder="Contact Person"
+                        required />
 
                     <input
                         onChange={handleChangePhoneNumber}
