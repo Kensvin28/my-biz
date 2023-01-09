@@ -251,7 +251,7 @@ function RegisterPage() {
 
                     <input
                         onChange={handleChangePhoneNumber}
-                        type="number"
+                        type="tel"
                         className="
         form-control
         block
@@ -326,7 +326,7 @@ function RegisterPage() {
 
                     <input
                         onChange={handleChangePin}
-                        type="tel"
+                        type="password"
                         className="
         form-control
         block
@@ -351,7 +351,7 @@ function RegisterPage() {
 
                     <input
                         onChange={handleChangeConfirmPin}
-                        type="tel"
+                        type="password"
                         className="
         form-control
         block
