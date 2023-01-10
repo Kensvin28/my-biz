@@ -8,6 +8,8 @@ import LoanPage from "./components/loan/LoanPage";
 import ProfilePage from "./components/profile/ProfilePage";
 import QrPage from "./components/qr/QRPage";
 import ApplyLoanPage from "./components/loan/ApplyLoanPage";
+import ScheduleTransfer from "./components/transaction/ScheduleTransfer";
+import OrganizeTransfer from "./components/transaction/OrganizeTransfer";
 
 function App() {
   return (
