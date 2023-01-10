@@ -43,7 +43,7 @@ export function StepperControl({ handleClick, currentStep, steps }: StepperParam
                 onClick={() => handleClick("next")}
                 className="inline-block px-6 py-2.5 font-medium text-xs leading-tight rounded focus:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out text-white hover:bg-slate-700 hover:text-white bg-blue-600"
             >
-                {currentStep === steps.length ? "Confirm" : "Next"}
+                {currentStep === steps.length ? "Submit" : "Next"}
             </button>
         </div>
     );
