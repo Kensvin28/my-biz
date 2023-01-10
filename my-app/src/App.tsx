@@ -22,6 +22,8 @@ function App() {
               <Route path="/apply-loan" element={<ApplyLoanPage />}/>
               <Route path="/profile" element={<ProfilePage />}/>
               <Route path="/qr" element={<QrPage />}/>
+              <Route path="/schedule-transfer" element={<ScheduleTransfer/>}/>
+              <Route path="/organize-transfer" element={<OrganizeTransfer/>}/>
           </Routes>
       </BrowserRouter>
       </div>
