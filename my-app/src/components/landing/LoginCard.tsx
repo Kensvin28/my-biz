@@ -60,7 +60,7 @@ const LoginCard = () => {
             console.log(GlobalPin);
 
             //redirect
-            //navigate('/dashboard');
+            navigate('/dashboard');
         }
         else if (data?.length == 0) {
             alert("Wrong Company Name or Password")
