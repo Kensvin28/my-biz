@@ -148,9 +148,9 @@ function ScheduleTransfer() {
 
                 <TextField
                     id="datetime-local"
-                    label="Next appointment"
+                    label="Schedule at"
                     type="datetime-local"
-                    defaultValue="2017-05-24T10:30"
+                    defaultValue="2022-01-15T10:30"
                     sx={{ width: 250 }}
                     InputLabelProps={{
                         shrink: true,

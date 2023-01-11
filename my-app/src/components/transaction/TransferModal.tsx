@@ -1,7 +1,8 @@
 // https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/react/modals/regular
 import React from "react";
 import Receipt from "./Receipt";
-import { toJpeg } from 'html-to-image';
+import {toJpeg} from "html-to-image";
+
 
 type Props = {
     showModal: boolean;
@@ -16,7 +17,7 @@ export default function Modal(props: Props) {
         toJpeg(element, {
             style: {background: "white"}
         })
-            .then(function (dataUrl) {
+            .then(function (dataUrl: string) {
                 const link = document.createElement('a');
                 link.download = 'daven.png';
                 link.href = dataUrl;
