@@ -17,11 +17,6 @@ function Transfer() {
     const [showModal, setShowModal] = useState(false)
     const [showTransferList, setShowTransferList] = useState(false);
 
-    sessionStorage.setItem("transferSourceAccount", inputSourceAccNum)
-    sessionStorage.setItem("transferDestinationeAccount", inputDestinationAccNum)
-    sessionStorage.setItem("transferAmmount", inputAmount)
-    sessionStorage.setItem("transferDescription", inputDescription)
-
     const transfer = () => {
         setShowModal(true);
         console.log('Transferred Successfully!');

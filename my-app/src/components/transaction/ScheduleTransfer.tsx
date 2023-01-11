@@ -1,14 +1,26 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Header from "../Header";
-import {supabaseAdmin} from "../../supabase";
+import { supabaseAdmin } from "../../supabase";
 import Modal from "./TransferModal";
+import { useNavigate } from 'react-router-dom';
 
 function ScheduleTransfer() {
     const [inputSourceAccNum, setInputSourceAccNum] = useState('')
     const [inputDestinationAccNum, setInputDestinationAccNum] = useState('')
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
+    const [inputDate, setinputDate] = useState('')
+    const [inputTime, setinputTime] = useState('')
     const [showModal, setShowModal] = React.useState(false)
+
+    var AccountNumber = sessionStorage.getItem("AccountNumber") || "Default";
+    const navigate = useNavigate();
+
+    var id = sessionStorage.getItem("id") || "Default";
+
+    const currentDate = new Date();
+    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+    const nextDate = new Date(currentDate.getTime() + oneDayInMilliseconds).toISOString().slice(0, 10);
 
     const handleDescription = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDescription(event.target.value);
@@ -35,14 +47,44 @@ function ScheduleTransfer() {
         console.log('password: ', inputSourceAccNum);
     };
 
+    const handleDate = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputDate(event.target.value);
+        console.log('date: ', inputDate);
+    };
+
+    const handleTime = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputTime(event.target.value);
+        console.log('time: ', inputTime);
+    };
 
     const openFavourites = () => {
 
     };
 
+    async function userTransferScheduled() {
+        //input to database
+        const { error } = await supabaseAdmin.from("transfer").insert({
+            senderID: id,
+            senderAccNum: inputSourceAccNum,
+            Destination: inputDestinationAccNum,
+            Amount: inputAmount,
+            Description: inputDescription,
+            isScheduled: "yes",
+            scheduleTime: inputTime,
+            scheduleDate: inputDate,
+        })
+        console.log("inputted")
+        alert("Scheduled Transfer Successfully Recorded")
+        navigate('/transaction');
+        if (error) {
+            //error will throw here
+            throw error;
+        }
+    }
+
     return (
         <div>
-            <Header/>
+            <Header />
             <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
 
                 <label htmlFor="source-account">Source Account</label>
@@ -61,7 +103,7 @@ function ScheduleTransfer() {
       ease-in-out
       m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Select Account">
-                    <option selected value="123456789">123456789</option>
+                    <option selected value={AccountNumber}>{AccountNumber}</option>
                 </select>
 
                 <label htmlFor="destination_account">Destination Account</label>
@@ -78,22 +120,22 @@ function ScheduleTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ">
-                <span className={"w-78"}>
-                <input className="form-control appearance-none outline-none
+                    <span className={"w-78"}>
+                        <input className="form-control appearance-none outline-none
         inline-block
         "
-                       type="text" id="destination_account" name="destinationAccount"
-                       onChange={handleDestinationAccNum}>
-                </input>
+                            type="text" id="destination_account" name="destinationAccount"
+                            onChange={handleDestinationAccNum}>
+                        </input>
                     </span>
                     <span>
-                    <button
-                        className="inline-block bg-none float-right"
-                        onClick={openFavourites}>
-                        <img className="h-6 object-centered m-auto"
-                             src={"https://img.icons8.com/material-two-tone/512/sorting-answers.png"}/>
-                    </button>
-                </span>
+                        <button
+                            className="inline-block bg-none float-right"
+                            onClick={openFavourites}>
+                            <img className="h-6 object-centered m-auto"
+                                src={"https://img.icons8.com/material-two-tone/512/sorting-answers.png"} />
+                        </button>
+                    </span>
                 </div>
 
                 <label htmlFor="amount">Amount (RM)</label>
@@ -113,8 +155,8 @@ function ScheduleTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" id="amount" name="amount"
-                       onChange={handleAmount}></input>
+                    type="text" id="amount" name="amount"
+                    onChange={handleAmount}></input>
 
                 <label htmlFor="description">Description</label>
                 <input className="form-control
@@ -133,14 +175,16 @@ function ScheduleTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" id="description" name="description"
-                       onChange={handleDescription}></input>
+                    type="text" id="description" name="description"
+                    onChange={handleDescription}></input>
 
                 <div className="flex items-center justify-center">
                     <div className="datepicker relative form-floating mb-3 w-full">
                         <label htmlFor="floatingInput" className="text-gray-700">Select a date</label>
-                        <input type="text"
-                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        <input type="date"
+                            onChange={handleDate}
+                            min={nextDate}
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
                     </div>
                 </div>
@@ -148,19 +192,20 @@ function ScheduleTransfer() {
                 <div className="flex items-center justify-center">
                     <div className="timepicker relative form-floating mb-3 w-full">
                         <label htmlFor="floatingInput" className="text-gray-700">Select a time</label>
-                        <input type="text"
-                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        <input type="time"
+                            onChange={handleTime}
+                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         />
                     </div>
                 </div>
 
                 <button
-                    onClick={scheduleTransfer}
+                    onClick={userTransferScheduled}
                     type="submit"
                     className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Schedule
                 </button>
 
-                <Modal showModal={showModal} setShowModal={setShowModal} type={"schedule"}/>
+                <Modal showModal={showModal} setShowModal={setShowModal} type={"schedule"} />
             </div>
         </div>
     );
