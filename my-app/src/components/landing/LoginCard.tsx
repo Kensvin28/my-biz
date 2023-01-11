@@ -7,19 +7,6 @@ import { supabaseAdmin } from '../../supabase';
 
 const LoginCard = () => {
     const navigate = useNavigate();
-
-    // const { isAuth, setAuth }: any = useContext(LoginContext)
-    // const login = async () => {
-    //     var result = await axios.get('http://localhost:5000/token', { withCredentials: true });
-    //     var { data } = result.data;
-    //     setAuth(data != null) //or conditional state
-    // }
-
-    // const logout = async () => {
-    //     await axios.get('logout')
-    //     setAuth(false) //or conditional state
-    // }
-    //--------------------------------------------------------------------------------------------------------
     const [inputCompName, setInputCompName] = useState('')
     const [inputPassword, setInputPassword] = useState('')
 
@@ -75,7 +62,7 @@ const LoginCard = () => {
         }
         else if (data?.length == 0) {
             alert("Wrong Company Name or Password")
-            console.log("no succes")
+            console.log("no success")
             console.log(data);
         }
         else if (error) {
@@ -93,6 +80,7 @@ const LoginCard = () => {
         <div className="flex justify-center">
             <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
                 <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Login</h5>
+                {/*<form className="loginForm" onSubmit={userLogin} action="#">*/}
                 <input
                     onChange={handleChangeComp}
                     type="text"
@@ -146,6 +134,7 @@ const LoginCard = () => {
                     type="submit"
                     className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Login
                 </button>
+                {/*</form>*/}
             </div>
         </div>
     );

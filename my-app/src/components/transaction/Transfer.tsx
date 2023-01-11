@@ -15,7 +15,7 @@ function Transfer() {
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
     const [showModal, setShowModal] = useState(false)
-    const [showTransferList, setShowTransferList] = useState(false);
+    const [showTransferList, setShowTransferList] = useState(false)
 
     sessionStorage.setItem("transferSourceAccount", inputSourceAccNum)
     sessionStorage.setItem("transferDestinationeAccount", inputDestinationAccNum)
@@ -29,6 +29,11 @@ function Transfer() {
 
     const handleDestinationAccNum = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDestinationAccNum(event.target.value);
+        console.log('destination:', inputDestinationAccNum);
+    };
+
+    const handleSelectedDestination = (account: string) => {
+        setInputDestinationAccNum(account);
         console.log('destination:', inputDestinationAccNum);
     };
 
@@ -111,7 +116,7 @@ function Transfer() {
         inline-block
         "
                             type="text" id="destination_account" name="destinationAccount"
-                            onChange={handleDestinationAccNum}>
+                            onChange={handleDestinationAccNum} value={inputDestinationAccNum}>
                         </input>
                     </span>
                     <span>
@@ -177,14 +182,14 @@ function Transfer() {
                             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                         >
                             <div className="relative w-auto my-6 mx-auto max-w-3xl bg-white">
-                                <TransferList showModal={showTransferList} setShowModal={setShowTransferList}></TransferList>
                                 <button
-                                    className="text-red-500 background-transparent px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="float-right text-red-500 background-transparent px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
                                     onClick={() => setShowTransferList(false)}
                                 >
                                     Close
                                 </button>
+                                <TransferList showModal={showTransferList} setShowModal={setShowTransferList} selectedDestination={handleSelectedDestination}></TransferList>
                             </div>
                         </div>
                     </>
