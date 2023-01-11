@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Header from "../Header";
 import {supabaseAdmin} from "../../supabase";
 import Modal from "./TransferModal";
+import TransferList from "./TransferList";
 
 function ScheduleTransfer() {
     const [inputSourceAccNum, setInputSourceAccNum] = useState('')
@@ -9,6 +10,11 @@ function ScheduleTransfer() {
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
     const [showModal, setShowModal] = React.useState(false)
+    const [showTransferList, setShowTransferList] = useState(false);
+
+    const openTransferList = () => {
+        setShowTransferList(true);
+    };
 
     const handleDescription = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDescription(event.target.value);
@@ -22,22 +28,23 @@ function ScheduleTransfer() {
 
     const handleDestinationAccNum = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDestinationAccNum(event.target.value);
-        console.log('compname:', inputDestinationAccNum);
+        console.log('destination:', inputDestinationAccNum);
+    };
+
+
+    const handleSelectedDestination = (account: string) => {
+        setInputDestinationAccNum(account);
+        console.log('destination:', inputDestinationAccNum);
     };
 
     const handleAmount = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputAmount(event.target.value);
-        console.log('password: ', inputAmount);
+        console.log('amount: ', inputAmount);
     };
 
     const handleSourceAccNum = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputSourceAccNum(event.target.value);
-        console.log('password: ', inputSourceAccNum);
-    };
-
-
-    const openFavourites = () => {
-
+        console.log('source: ', inputSourceAccNum);
     };
 
     return (
@@ -83,13 +90,13 @@ function ScheduleTransfer() {
         inline-block
         "
                        type="text" id="destination_account" name="destinationAccount"
-                       onChange={handleDestinationAccNum}>
+                       onChange={handleDestinationAccNum} value={inputDestinationAccNum}>
                 </input>
                     </span>
                     <span>
                     <button
                         className="inline-block bg-none float-right"
-                        onClick={openFavourites}>
+                        onClick={openTransferList}>
                         <img className="h-6 object-centered m-auto"
                              src={"https://img.icons8.com/material-two-tone/512/sorting-answers.png"}/>
                     </button>
@@ -161,6 +168,24 @@ function ScheduleTransfer() {
                 </button>
 
                 <Modal showModal={showModal} setShowModal={setShowModal} type={"schedule"}/>
+                {showTransferList &&
+                    <>
+                        <div
+                            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                        >
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl bg-white">
+                                <button
+                                    className="float-right text-red-500 background-transparent px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => setShowTransferList(false)}
+                                >
+                                    Close
+                                </button>
+                                <TransferList showModal={showTransferList} setShowModal={setShowTransferList} selectedDestination={handleSelectedDestination}></TransferList>
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
         </div>
     );
