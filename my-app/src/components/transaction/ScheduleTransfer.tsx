@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Header from "../Header";
 import {supabaseAdmin} from "../../supabase";
 import Modal from "./TransferModal";
+import type {} from '@mui/x-date-pickers-pro/themeAugmentation';
+import TextField from '@mui/material/TextField';
 import TransferList from "./TransferList";
 
 function ScheduleTransfer() {
@@ -130,6 +132,7 @@ function ScheduleTransfer() {
         px-3
         py-1.5
         my-1.5
+        mb-6
         text-base
         font-normal
         text-gray-700
@@ -143,28 +146,21 @@ function ScheduleTransfer() {
                        type="text" id="description" name="description"
                        onChange={handleDescription}></input>
 
-                <div className="flex items-center justify-center">
-                    <div className="datepicker relative form-floating mb-3 w-full">
-                        <label htmlFor="floatingInput" className="text-gray-700">Select a date</label>
-                        <input type="text"
-                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        />
-                    </div>
-                </div>
-
-                <div className="flex items-center justify-center">
-                    <div className="timepicker relative form-floating mb-3 w-full">
-                        <label htmlFor="floatingInput" className="text-gray-700">Select a time</label>
-                        <input type="text"
-                               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        />
-                    </div>
-                </div>
+                <TextField
+                    id="datetime-local"
+                    label="Next appointment"
+                    type="datetime-local"
+                    defaultValue="2017-05-24T10:30"
+                    sx={{ width: 250 }}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
 
                 <button
                     onClick={scheduleTransfer}
                     type="submit"
-                    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Schedule
+                    className="inline-block mt-6 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Schedule
                 </button>
 
                 <Modal showModal={showModal} setShowModal={setShowModal} type={"schedule"}/>

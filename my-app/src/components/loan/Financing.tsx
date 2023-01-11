@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 function Financing() {
-    const [purpose, setPurpose] = useState("");
+    const [purpose, setPurpose] = useState("Working Capital");
 
     const purposeChange = (e: any) => {
         setPurpose(e.target.value);
     }
+
+    sessionStorage.setItem("loanPurpose", purpose)
 
     return (
         <div>
@@ -13,7 +15,7 @@ function Financing() {
                 <p>Purpose</p>
                 <div>
                     <input defaultChecked className="mr-2" type="radio" id="working_capital" name="purpose" value="Working Capital"
-                           onChange={purposeChange}></input>
+                        onChange={purposeChange}></input>
                     <label htmlFor="working_capital">Working Capital</label>
                 </div>
 

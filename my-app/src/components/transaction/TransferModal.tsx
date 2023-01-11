@@ -1,6 +1,7 @@
 // https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/react/modals/regular
 import React from "react";
 import Receipt from "./Receipt";
+import { toJpeg } from 'html-to-image';
 
 type Props = {
     showModal: boolean;
@@ -10,8 +11,19 @@ type Props = {
 export default function Modal(props: Props) {
     const state = {...props};
     const shareReceipt = () => {
+        const element = document.getElementById('receipt')!;
+        console.log(element);
+        toJpeg(element, {
+            style: {background: "white"}
+        })
+            .then(function (dataUrl) {
+                const link = document.createElement('a');
+                link.download = 'daven.png';
+                link.href = dataUrl;
+                link.click();
+            });
         state.setShowModal(false)
-    };
+    }
     return (
         <>
             {state.showModal && (
@@ -57,7 +69,7 @@ export default function Modal(props: Props) {
                                         <button
                                             className="inline-block px-2 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                             type="button"
-                                            onClick={() => shareReceipt}
+                                            onClick={shareReceipt}
                                         >
                                             Share Receipt
                                         </button>}
