@@ -1,16 +1,33 @@
 import React from "react";
 import {useState} from 'react';
+import { supabaseAdmin } from "../../supabase";
 
 //https://www.spguides.com/upload-file-in-react-js/
 const MAX_FILE = 10;
+let imagelinks: string[]=[]
 
 function FileUpload() {
     const [uploadedFiles, setUploadedFiles] = useState([])
-    const [fileLimit, setFileLimit] = useState(false);
+    const [fileLimit, setFileLimit] = useState(false);    
+    
+    async function checkloans() {
+        const { data, error } = await supabaseAdmin
+        .from('companyloan')
+        .select()
+        .eq('companyId', sessionStorage.getItem("id"))
 
-    const handleUploadFiles = (files: any) => {
+        console.log(data?.length);
+        if(error){
+            throw error
+        }
+        return(data?.length)
+    }
+
+    //  const handleUploadFiles = (files: any) => 
+    async function  handleUploadFiles (files: any){
         const uploaded: any = [...uploadedFiles];
         let limitExceeded = false;
+        
         // check if the file is already exists
         files.some((file: any) => {
             if (uploaded.findIndex((f: any) => f.name === file.name) === -1) {
@@ -18,16 +35,45 @@ function FileUpload() {
                 if (uploaded.length === MAX_FILE) setFileLimit(true);
                 //limit the number of file to be uploaded
                 if (uploaded.length > MAX_FILE) {
-                    alert(`You can only add a maximum of $ MaxFile} files`);
+                    alert(`You can only add a maximum of ${MAX_FILE} files`);
                     setFileLimit(false);
                     limitExceeded = true;
                     return true;
                 }
             }
         })
-        if (!limitExceeded) setUploadedFiles(uploaded)
+
+        if (!limitExceeded) {
+            setUploadedFiles(uploaded);
+            
+            //check number of loans
+            let numloan=await checkloans();
+            
+            //input to storage
+            console.log(numloan)
+            let imgid=(sessionStorage.getItem("id")+ "-"+ numloan);
+            console.log(files[0]["name"])
+            const { data, error } = await supabaseAdmin.storage
+                .from("loandocument")
+                .upload(imgid + "/" + files[0]["name"], files[0]);
+                if (data) {
+                    console.log(JSON.stringify({ data }));
+                    //add to image array
+                    let imglink="https://rcpoovvkbiqrqvbcvcbw.supabase.co/storage/v1/object/public/loandocument/"+sessionStorage.getItem("id")+"-"+numloan+"/"+files[0]["name"];
+                    console.log(imglink)
+                    imagelinks.push(imglink)
+                    console.log(imagelinks);
+                    console.log(JSON.stringify(imagelinks));
+                    sessionStorage.setItem("loanDocs", JSON.stringify(imagelinks))
+                } else if (error) {
+                    console.log(error);
+                }};     
     }
 
+    // store url to the local session
+    function storeimageurls(){
+        //imagelinks
+    }
     const fileEventHandler = (e: any) => {
         const chosenFiles = Array.prototype.slice.call(e.target.files)
         handleUploadFiles(chosenFiles);
@@ -38,7 +84,7 @@ function FileUpload() {
             {/*  display the uploaded files */}
             <input className='border border-solid border-gray-300 px-4 py-2 rounded m-2' id='fileUpload' type='file'
                    multiple
-                   accept='application/pdf, image/png'
+                   accept='application/pdf, image/png,image/jpeg'
                    onChange={fileEventHandler}
                    disabled={fileLimit}
             />
@@ -68,7 +114,7 @@ function Documents() {
                 </ul>
                 <div className="flex">
                     <FileUpload/>
-                    {/*              <input id="documents" className="*/}
+                    {/*  <input id="documents" className="*/}
                     {/*  form-control*/}
                     {/*  block*/}
                     {/*  w-full*/}
