@@ -124,7 +124,7 @@ function RegisterPage() {
         }
 
         //input to database
-        const { data, error } = await supabaseAdmin.from("companies").insert({
+        const { error } = await supabaseAdmin.from("companies").insert({
             CompanyName: inputCompName,
             BusinessRegNumber: inputBusinessNum,
             CompanyAddress: inputAddress,

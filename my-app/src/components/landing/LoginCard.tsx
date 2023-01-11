@@ -47,39 +47,28 @@ const LoginCard = () => {
 
         if (data?.length != 0) {
             console.log("success")
-            console.log(data);
+            console.log(data![0].id);
 
-            var GlobalCompanyName = data!.map(user => user.id).toString();
-            var GlobalBusinessRegNumber = data!.map(user => user.BusinessRegNumber).toString();
-            var GlobalCompanyAddress = data!.map(user => user.CompanyAddress).toString();
-            var GlobalContactPerson = data!.map(user => user.ContactPerson).toString();
-            var GlobalPhoneNumber = data!.map(user => user.PhoneNumber).toString();
-            var GlobalPassword = data!.map(user => user.Password).toString();
-            var GlobalPin = data!.map(user => user.PIN).toString();
-            console.log(GlobalCompanyName);
-            console.log(GlobalBusinessRegNumber);
-            console.log(GlobalCompanyAddress);
-            console.log(GlobalContactPerson);
-            console.log(GlobalPhoneNumber);
-            console.log(GlobalPassword);
-            console.log(GlobalPin);
+            var companyId = (data![0].id)
+            var CompanyName = data![0].CompanyName;
+            var BusinessRegNumber = data![0].BusinessRegNumber;
+            var CompanyAddress = data![0].CompanyAddress;
+            var ContactPerson = data![0].ContactPerson;
+            var PhoneNumber = data![0].PhoneNumber;
+            var Password = data![0].Password;
+            var Pin = data![0].PIN;
+            console.log("COMPANY ID: " + companyId)
 
-            sessionStorage.setItem("id", GlobalCompanyName)
-
-            let globalVariables: string[] = [
-                GlobalCompanyName,
-                GlobalBusinessRegNumber,
-                GlobalCompanyAddress,
-                GlobalContactPerson,
-                GlobalPhoneNumber,
-                GlobalPassword,
-                GlobalPin]
-                ;
-
-
+            sessionStorage.setItem("id", companyId)
+            sessionStorage.setItem("CompanyName", CompanyName)
+            sessionStorage.setItem("BusinessRegNumber", BusinessRegNumber)
+            sessionStorage.setItem("CompanyAddress", CompanyAddress)
+            sessionStorage.setItem("ContactPerson", ContactPerson)
+            sessionStorage.setItem("PhoneNumber", PhoneNumber)
+            sessionStorage.setItem("Password", Password)
+            sessionStorage.setItem("Pin", Pin)
             //redirect
             navigate('/dashboard');
-            return globalVariables;
 
         }
         else if (data?.length == 0) {

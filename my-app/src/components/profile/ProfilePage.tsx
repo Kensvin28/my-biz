@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../Header";
+import { supabaseAdmin } from '../../supabase';
+import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
     useEffect(() => {
@@ -7,8 +9,83 @@ function ProfilePage() {
         console.log(id)
     }, [sessionStorage])
 
+    const navigate = useNavigate();
+
+    const fallbackString = 'Default';
+
+    var CompanyId = sessionStorage.getItem("id") || fallbackString;
+    var CompanyName = sessionStorage.getItem("CompanyName") || fallbackString;
+    var BusinessRegNumber = sessionStorage.getItem("BusinessRegNumber") || fallbackString;
+    var CompanyAddress = sessionStorage.getItem("CompanyAddress") || fallbackString;
+    var ContactPerson = sessionStorage.getItem("ContactPerson") || fallbackString;
+    var PhoneNumber = sessionStorage.getItem("PhoneNumber") || fallbackString;
+    var Password = sessionStorage.getItem("Password") || fallbackString;
+    var Pin = sessionStorage.getItem("Pin") || fallbackString;
+
+
+    const [inputPassword, setinputPassword] = useState('')
+    const [inputConfPassword, setinputConfPassword] = useState('')
+    const [inputPin, setinputPin] = useState('')
+    const [inputConfPin, setinputConfPin] = useState('')
+
+    const handleChangePassword = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputPassword(event.target.value);
+        console.log('compname:', inputPassword);
+    };
+
+    const handleChangeConfirmPassword = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputConfPassword(event.target.value);
+        console.log('compname:', inputConfPassword);
+    };
+
+    const handleChangePin = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputPin(event.target.value);
+        console.log('compname:', inputPin);
+    };
+
+    const handleChangeConfirmPin = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputConfPin(event.target.value);
+        console.log('compname:', inputConfPin);
+    };
+
+    //update password
+    async function updatePassword() {
+        if (inputPassword == inputConfPassword) {
+            const { error } = await supabaseAdmin
+                .from('companies')
+                .update({ Password: inputPassword })
+                .eq('id', CompanyId)
+
+            alert("Password Changed Successfully")
+            navigate('/');
+            if (error) {
+                throw error;
+            }
+        } else {
+            alert("Wrong Password")
+        }
+
+    }
+
+    //update password
+    async function updatePin() {
+        if (inputPin == inputConfPin) {
+            const { error } = await supabaseAdmin
+                .from('companies')
+                .update({ PIN: inputPin })
+                .eq('id', CompanyId)
+            alert("PIN Changed Successfully")
+            navigate('/');
+            if (error) {
+                throw error;
+            }
+        } else {
+            alert("Wrong PIN")
+        }
+    }
 
     return (
+
         <div>
             <Header />
             {/*https://tailwindcomponents.com/component/profile-form*/}
@@ -27,7 +104,7 @@ function ProfilePage() {
                                 <div className="flex">
                                     <input disabled id="companyName" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="Alun Noodle" />
+      " type="text" defaultValue={CompanyName} />
                                 </div>
                             </div>
                             <div className="pb-4">
@@ -42,7 +119,7 @@ function ProfilePage() {
                                     Number</label>
                                 <input disabled id="businessRegistrationNumber" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="123456789" />
+      " type="text" defaultValue={BusinessRegNumber} />
                             </div>
 
                             <div className="pb-4">
@@ -50,7 +127,7 @@ function ProfilePage() {
                                 <div className="flex">
                                     <input disabled id="address" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="190 Bukit Jalil, Kuala Lumpur" />
+      " type="text" defaultValue={CompanyAddress} />
                                 </div>
                             </div>
 
@@ -59,7 +136,7 @@ function ProfilePage() {
                                 <div className="flex">
                                     <input disabled id="contactPerson" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="A Wen" />
+      " type="text" defaultValue={ContactPerson} />
                                 </div>
                             </div>
 
@@ -68,7 +145,7 @@ function ProfilePage() {
                                 <div className="flex">
                                     <input disabled id="phoneNumber" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="01234567890" />
+      " type="text" defaultValue={PhoneNumber} />
                                 </div>
                             </div>
 
@@ -81,7 +158,7 @@ function ProfilePage() {
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Change Password</label>
                                 <div className="flex">
-                                    <input id="password" className="
+                                    <input onChange={handleChangePassword} id="password" className="
         form-control
         block
         w-full
@@ -98,14 +175,14 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="password1$" />
+      " type="password" defaultValue={Password} />
                                 </div>
                             </div>
 
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Confirm Password</label>
                                 <div className="flex">
-                                    <input id="confirmPassword" className="
+                                    <input onChange={handleChangeConfirmPassword} id="confirmPassword" className="
         form-control
         block
         w-full
@@ -122,11 +199,12 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="password1$" />
+      " type="password" defaultValue={Password} />
                                 </div>
                             </div>
                             <button type="button"
-                                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save Password
+                                onClick={updatePassword}
+                                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Change Password
                             </button>
                         </div>
                     </div>
@@ -136,7 +214,7 @@ function ProfilePage() {
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Change PIN</label>
                                 <div className="flex">
-                                    <input id="password" className="
+                                    <input onChange={handleChangePin} id="password" className="
         form-control
         block
         w-full
@@ -153,14 +231,14 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="123456" />
+      " type="password" defaultValue={Pin} />
                                 </div>
                             </div>
 
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Confirm PIN</label>
                                 <div className="flex">
-                                    <input id="confirmPassword" className="
+                                    <input onChange={handleChangeConfirmPin} id="confirmPassword" className="
         form-control
         block
         w-full
@@ -177,11 +255,12 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="123456" />
+      " type="password" defaultValue={Pin} />
                                 </div>
                             </div>
                             <button type="button"
-                                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save PIN
+                                onClick={updatePin}
+                                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Change PIN
                             </button>
                         </div>
                     </div>
