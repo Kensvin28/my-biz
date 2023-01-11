@@ -46,7 +46,7 @@ const LoginCard = () => {
             .eq('Password', inputPassword)
 
         if (data?.length != 0) {
-            console.log("succes")
+            console.log("success")
             console.log(data);
 
             var GlobalCompanyName = data!.map(user => user.id).toString();

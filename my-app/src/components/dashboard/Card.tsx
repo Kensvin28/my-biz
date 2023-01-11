@@ -7,11 +7,13 @@ function Card({text, cardTitle, image}: { text: string | null, cardTitle: string
     return (
         <div>
                 <div
-                    className="flex flex-col w-full md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg hover:bg-gray-100 hover:shadow-lg focus:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg">
+                    className="flex flex-col w-full md:max-w-xl rounded-lg bg-white shadow-lg hover:bg-gray-100 hover:shadow-lg focus:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg">
+                    <div className="mx-auto w-36 h-36 md:h-48">
                     <img
-                        className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+                        className=" w-full md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
                         src={image}/>
-                    <div className="block p-6 rounded-r-lg shadow-lg max-w-sm w-full">
+                    </div>
+                    <div className="h-48 block p-6 rounded-r-lg shadow-lg max-w-sm w-full">
                         <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2 w-full">{cardTitle}</h5>
                         <p className="text-gray-700 text-base mb-4 w-full">
                             {text}

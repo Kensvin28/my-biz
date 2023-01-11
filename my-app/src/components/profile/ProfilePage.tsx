@@ -25,23 +25,8 @@ function ProfilePage() {
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Company Name</label>
                                 <div className="flex">
-                                    <input id="companyName" className="
-        form-control
-        block
-        w-full
-        px-4
-        py-2
-        my-2
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    <input disabled id="companyName" className="
+        border-1  rounded px-4 py-2 w-full
       " type="text" defaultValue="Alun Noodle" />
                                 </div>
                             </div>
@@ -63,23 +48,8 @@ function ProfilePage() {
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Address</label>
                                 <div className="flex">
-                                    <input id="address" className="
-        form-control
-        block
-        w-full
-        px-4
-        py-2
-        my-2
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    <input disabled id="address" className="
+        border-1  rounded px-4 py-2 w-full
       " type="text" defaultValue="190 Bukit Jalil, Kuala Lumpur" />
                                 </div>
                             </div>
@@ -87,23 +57,8 @@ function ProfilePage() {
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Contact Person</label>
                                 <div className="flex">
-                                    <input id="contactPerson" className="
-        form-control
-        block
-        w-full
-        px-4
-        py-2
-        my-2
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    <input disabled id="contactPerson" className="
+        border-1  rounded px-4 py-2 w-full
       " type="text" defaultValue="A Wen" />
                                 </div>
                             </div>
@@ -111,23 +66,8 @@ function ProfilePage() {
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Phone Number</label>
                                 <div className="flex">
-                                    <input id="phoneNumber" className="
-        form-control
-        block
-        w-full
-        px-4
-        py-2
-        my-2
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                    <input disabled id="phoneNumber" className="
+        border-1  rounded px-4 py-2 w-full
       " type="text" defaultValue="01234567890" />
                                 </div>
                             </div>
@@ -185,6 +125,9 @@ function ProfilePage() {
       " type="password" defaultValue="password1$" />
                                 </div>
                             </div>
+                            <button type="button"
+                                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save Password
+                            </button>
                         </div>
                     </div>
 
@@ -237,6 +180,9 @@ function ProfilePage() {
       " type="password" defaultValue="123456" />
                                 </div>
                             </div>
+                            <button type="button"
+                                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Save PIN
+                            </button>
                         </div>
                     </div>
                 </div>

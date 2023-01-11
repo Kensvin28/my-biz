@@ -8,6 +8,8 @@ import LoanPage from "./components/loan/LoanPage";
 import ProfilePage from "./components/profile/ProfilePage";
 import QrPage from "./components/qr/QRPage";
 import ApplyLoanPage from "./components/loan/ApplyLoanPage";
+import ScheduleTransfer from "./components/transaction/ScheduleTransfer";
+import OrganizeTransfer from "./components/transaction/OrganizeTransfer";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
               <Route path="/apply-loan" element={<ApplyLoanPage />}/>
               <Route path="/profile" element={<ProfilePage />}/>
               <Route path="/qr" element={<QrPage />}/>
+              <Route path="/schedule-transfer" element={<ScheduleTransfer/>}/>
+              <Route path="/organize-transfer" element={<OrganizeTransfer/>}/>
           </Routes>
       </BrowserRouter>
       </div>
