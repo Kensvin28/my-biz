@@ -7,8 +7,10 @@ function ScheduleTransfer() {
     const [inputDesignatedAccNum, setInputDesignatedAccNum] = useState('')
     const [inputAmount, setInputAmount] = useState('')
     const [inputSourceAccNum, setInputSourceAccNum] = useState('')
+    const [showModal, setShowModal] = React.useState(false)
 
     const scheduleTransfer = () => {
+        setShowModal(true);
         console.log('Transfer Scheduled Successfully!');
     };
 
@@ -32,8 +34,8 @@ function ScheduleTransfer() {
         <div>
             <Header/>
             <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
-                    <label htmlFor="designated_account">Designated Account</label>
-                    <input className="form-control
+                <label htmlFor="designated_account">Designated Account</label>
+                <input className="form-control
         block
         w-80
         px-3
@@ -49,11 +51,11 @@ function ScheduleTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                           type="text" id="designated_account" name="designatedAccount" value=""
-                           onChange={handleDesignatedAccNum}></input>
+                       type="text" id="designated_account" name="designatedAccount" value=""
+                       onChange={handleDesignatedAccNum}></input>
 
-                        <label htmlFor="amount">Amount</label>
-                        <input className="form-control
+                <label htmlFor="source-account">Source Account</label>
+                <input className="form-control
         block
         w-80
         px-3
@@ -69,10 +71,11 @@ function ScheduleTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" id="amount" name="amount" value=""
-                               onChange={handleAmount}></input>
-                            <label htmlFor="source-account">Source Account</label>
-                            <input className="form-control
+                       type="text" id="source_account" name="sourceAccount" value=""
+                       onChange={handleSourceAccNum}></input>
+
+                <label htmlFor="amount">Amount</label>
+                <input className="form-control
         block
         w-80
         px-3
@@ -88,8 +91,8 @@ function ScheduleTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                   type="text" id="source_account" name="sourceAccount" value=""
-                                   onChange={handleSourceAccNum}></input>
+                       type="text" id="amount" name="amount" value=""
+                       onChange={handleAmount}></input>
 
                 <div className="flex items-center justify-center">
                     <div className="datepicker relative form-floating mb-3 xl:w-96">
@@ -112,10 +115,10 @@ function ScheduleTransfer() {
                 <button
                     onClick={scheduleTransfer}
                     type="submit"
-                    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Submit
+                    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Schedule
                 </button>
-                        </div>
-                    </div>
+            </div>
+        </div>
     );
 }
 
