@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from "../Header";
 
 function ProfilePage() {
+    useEffect(() => {
+        const id = sessionStorage.getItem("id")
+        console.log(id)
+    }, [sessionStorage])
+
+
     return (
         <div>
-            <Header/>
+            <Header />
             {/*https://tailwindcomponents.com/component/profile-form*/}
             <div className="h-full my-2">
                 <div className="border-b-2 block md:flex">
@@ -36,14 +42,14 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="text" defaultValue="Alun Noodle"/>
+      " type="text" defaultValue="Alun Noodle" />
                                 </div>
                             </div>
                             <div className="pb-4">
                                 <label className="font-semibold text-gray-700 block pb-1">Account Number</label>
                                 <input disabled id="accountNumber" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="123456789"/>
+      " type="text" defaultValue="123456789" />
                             </div>
 
                             <div className="pb-4">
@@ -51,7 +57,7 @@ function ProfilePage() {
                                     Number</label>
                                 <input disabled id="businessRegistrationNumber" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="123456789"/>
+      " type="text" defaultValue="123456789" />
                             </div>
 
                             <div className="pb-4">
@@ -74,7 +80,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="text" defaultValue="190 Bukit Jalil, Kuala Lumpur"/>
+      " type="text" defaultValue="190 Bukit Jalil, Kuala Lumpur" />
                                 </div>
                             </div>
 
@@ -98,7 +104,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="text" defaultValue="A Wen"/>
+      " type="text" defaultValue="A Wen" />
                                 </div>
                             </div>
 
@@ -122,7 +128,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="text" defaultValue="01234567890"/>
+      " type="text" defaultValue="01234567890" />
                                 </div>
                             </div>
 
@@ -152,7 +158,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="password1$"/>
+      " type="password" defaultValue="password1$" />
                                 </div>
                             </div>
 
@@ -176,7 +182,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="password1$"/>
+      " type="password" defaultValue="password1$" />
                                 </div>
                             </div>
                         </div>
@@ -204,7 +210,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="123456"/>
+      " type="password" defaultValue="123456" />
                                 </div>
                             </div>
 
@@ -228,7 +234,7 @@ function ProfilePage() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      " type="password" defaultValue="123456"/>
+      " type="password" defaultValue="123456" />
                                 </div>
                             </div>
                         </div>

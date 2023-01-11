@@ -33,6 +33,11 @@ const LoginCard = () => {
         console.log('password: ', inputPassword);
     };
 
+    function test() {
+        let fruit: string[] = ["banana", "kntl"]
+        return fruit;
+    }
+
     async function userLogin() {
         const { data, error } = await supabaseAdmin
             .from('companies')
@@ -44,13 +49,13 @@ const LoginCard = () => {
             console.log("succes")
             console.log(data);
 
-            var GlobalCompanyName = data?.map(user => user.CompanyName).toString();
-            var GlobalBusinessRegNumber = data?.map(user => user.BusinessRegNumber).toString();
-            var GlobalCompanyAddress = data?.map(user => user.CompanyAddress).toString();
-            var GlobalContactPerson = data?.map(user => user.ContactPerson).toString();
-            var GlobalPhoneNumber = data?.map(user => user.PhoneNumber).toString();
-            var GlobalPassword = data?.map(user => user.Password).toString();
-            var GlobalPin = data?.map(user => user.PIN).toString();
+            var GlobalCompanyName = data!.map(user => user.id).toString();
+            var GlobalBusinessRegNumber = data!.map(user => user.BusinessRegNumber).toString();
+            var GlobalCompanyAddress = data!.map(user => user.CompanyAddress).toString();
+            var GlobalContactPerson = data!.map(user => user.ContactPerson).toString();
+            var GlobalPhoneNumber = data!.map(user => user.PhoneNumber).toString();
+            var GlobalPassword = data!.map(user => user.Password).toString();
+            var GlobalPin = data!.map(user => user.PIN).toString();
             console.log(GlobalCompanyName);
             console.log(GlobalBusinessRegNumber);
             console.log(GlobalCompanyAddress);
@@ -59,8 +64,23 @@ const LoginCard = () => {
             console.log(GlobalPassword);
             console.log(GlobalPin);
 
+            sessionStorage.setItem("id", GlobalCompanyName)
+
+            let globalVariables: string[] = [
+                GlobalCompanyName,
+                GlobalBusinessRegNumber,
+                GlobalCompanyAddress,
+                GlobalContactPerson,
+                GlobalPhoneNumber,
+                GlobalPassword,
+                GlobalPin]
+                ;
+
+
             //redirect
-            //navigate('/dashboard');
+            navigate('/dashboard');
+            return globalVariables;
+
         }
         else if (data?.length == 0) {
             alert("Wrong Company Name or Password")
