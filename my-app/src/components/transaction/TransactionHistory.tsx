@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabaseAdmin } from '../../supabase';
 import Header from '../Header';
 
+interface transaction{
+
+}
+
 function TransactionHistory() {
+
+    const [transactionsdata, setTransactiondata] = useState<transaction []>()
+
+    useEffect(() => {supabaseAdmin
+        .from('transfer')
+        .select()
+        .eq('senderID', sessionStorage.getItem("id"))
+        .then(({ data, error }) => {
+        if (!error) {
+            // setTransactiondata(data)
+        }
+        }) }, [])
+    
+
     return (
         <div>
             <Header/>
@@ -23,6 +42,16 @@ function TransactionHistory() {
                     </thead>
 
                     <tbody className="text-center" id="transaction_history_table_body">
+                        {transactionsdata? transactionsdata.map((detail, index)=>
+                        {return (
+                            <tr>
+                                <td id="history_data_id">00001</td>
+                                <td id="history_data_date">11/01/2023</td>
+                                <td className="text-red-600" id="history_data_amount">-RM 570.00</td>
+                                <td id="history_data_recipient">Alun Company</td>
+                            </tr>
+                        )}):<></>}
+                        
                         <tr>
                         <td id="history_data_id">00001</td>
                         <td id="history_data_date">11/01/2023</td>
