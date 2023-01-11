@@ -9,7 +9,7 @@ function Transfer() {
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
     const [showModal, setShowModal] = useState(false)
-    const [showTransferList, setShowTransferList] = useState(false);
+    const [showTransferList, setShowTransferList] = useState(false)
 
     const transfer = () => {
         setShowModal(true);
@@ -59,7 +59,7 @@ function Transfer() {
       ease-in-out
       m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Select Account">
-                    <option selected value="123456789">123456789</option>
+                    <option selected>123456789</option>
                 </select>
 
                 <label htmlFor="destination_account">Destination Account</label>

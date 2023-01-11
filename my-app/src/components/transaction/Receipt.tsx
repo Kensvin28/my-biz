@@ -9,6 +9,9 @@ function Receipt() {
             <p className="my-4 text-slate-500 text-lg leading-relaxed">
                 Source Account :
             </p>
+            <p className="my-4 text-slate-500 text-lg leading-relaxed">Destination Account :</p>
+            <p className="my-4 text-slate-500 text-lg leading-relaxed">Amount :</p>
+            <p className="my-4 text-slate-500 text-lg leading-relaxed">Description :</p>
         </div>
     );
 }
