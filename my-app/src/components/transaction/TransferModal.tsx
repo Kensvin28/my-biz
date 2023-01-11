@@ -1,18 +1,19 @@
 // https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/react/modals/regular
 import React from "react";
+import Receipt from "./Receipt";
 
-export default function Modal() {
-    const [showModal, setShowModal] = React.useState(false);
+type Props = {
+    showModal: boolean;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export default function Modal(props: Props) {
+    const state = {...props};
+    const shareReceipt = () => {
+        state.setShowModal(false)
+    };
     return (
         <>
-            <button
-                className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(true)}
-            >
-                Open regular modal
-            </button>
-            {showModal ? (
+            {state.showModal && (
                 <>
                     <div
                         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
@@ -23,11 +24,11 @@ export default function Modal() {
                                 {/*header*/}
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                                     <h3 className="text-3xl font-semibold">
-                                        Modal Title
+                                        Transfer Successful!
                                     </h3>
                                     <button
                                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                        onClick={() => setShowModal(false)}
+                                        onClick={() => state.setShowModal(false)}
                                     >
                     <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                       ×
@@ -36,29 +37,23 @@ export default function Modal() {
                                 </div>
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
-                                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                        I always felt like I could do anything. That’s the main
-                                        thing people are controlled by! Thoughts- their perception
-                                        of themselves! They're slowed down by their perception of
-                                        themselves. If you're taught you can’t do anything, you
-                                        won’t do anything. I was taught I could do everything.
-                                    </p>
+                                    <Receipt></Receipt>
                                 </div>
                                 {/*footer*/}
                                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                                     <button
-                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        className="inline-block px-2 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                         type="button"
-                                        onClick={() => setShowModal(false)}
+                                        onClick={() => shareReceipt}
                                     >
-                                        Close
+                                        Share Receipt
                                     </button>
                                     <button
-                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        className="text-red-500 background-transparent px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => setShowModal(false)}
+                                        onClick={() => state.setShowModal(false)}
                                     >
-                                        Save Changes
+                                        Close
                                     </button>
                                 </div>
                             </div>
@@ -66,7 +61,7 @@ export default function Modal() {
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                 </>
-            ) : null}
+            )}
         </>
     );
 }
