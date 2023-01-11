@@ -57,6 +57,7 @@ const LoginCard = () => {
             var PhoneNumber = data![0].PhoneNumber;
             var Password = data![0].Password;
             var Pin = data![0].PIN;
+            var AccountNumber = data![0].AccountNumber;
             console.log("COMPANY ID: " + companyId)
 
             sessionStorage.setItem("id", companyId)
@@ -67,6 +68,7 @@ const LoginCard = () => {
             sessionStorage.setItem("PhoneNumber", PhoneNumber)
             sessionStorage.setItem("Password", Password)
             sessionStorage.setItem("Pin", Pin)
+            sessionStorage.setItem("AccountNumber", AccountNumber)
             //redirect
             navigate('/dashboard');
 

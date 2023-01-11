@@ -70,7 +70,7 @@ function RegisterPage() {
     };
 
     async function checkAvailabilityCompany() {
-        //check if company name or number is used
+        //check if company name is used
         const { data, error } = await supabaseAdmin
             .from('companies')
             .select()
@@ -90,7 +90,7 @@ function RegisterPage() {
     }
 
     async function checkAvailabilityNumber() {
-        //check if company name or number is used
+        //check if business number is used
         const { data, error } = await supabaseAdmin
             .from('companies')
             .select()
@@ -109,9 +109,36 @@ function RegisterPage() {
         }
     }
 
+    function generateAccountNumber() {
+        return Math.floor(Math.random() * 900000000 + 100000000);
+    }
+
+    let accountNumberRandom = generateAccountNumber()
+
+    async function checkAvailabilityAccount() {
+        //check if account number exist or not
+        const { data, error } = await supabaseAdmin
+            .from('companies')
+            .select()
+            .eq('AccountNumber', accountNumberRandom)
+
+        if (data?.length != 0) {
+            alert("Business Registration Number Already Used!")
+            console.log(data)
+            generateAccountNumber()
+            return false
+        }
+        else if (error) {
+            throw error;
+        } else {
+            console.log("all good")
+            return true
+        }
+    }
+
     async function userRegister() {
         //check availability
-        if (await checkAvailabilityCompany() == false || await checkAvailabilityNumber() == false) {
+        if (await checkAvailabilityCompany() == false || await checkAvailabilityNumber() == false || await checkAvailabilityAccount() == false) {
             console.log("error")
             return;
         }
@@ -132,6 +159,7 @@ function RegisterPage() {
             PhoneNumber: inputPhoneNum,
             Password: inputPassword,
             PIN: inputPin,
+            AccountNumber: accountNumberRandom,
         })
         console.log("inputted")
         navigate('/');

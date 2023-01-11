@@ -1,15 +1,26 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Header from '../Header';
 import Modal from "./TransferModal";
 import TransferList from "./TransferList";
+import { supabaseAdmin } from '../../supabase';
+import { useNavigate } from 'react-router-dom';
 
 function Transfer() {
+    var AccountNumber = sessionStorage.getItem("AccountNumber") || "Default";
+    var id = sessionStorage.getItem("id") || "Default";
+
+    const navigate = useNavigate();
     const [inputDestinationAccNum, setInputDestinationAccNum] = useState('')
-    const [inputSourceAccNum, setInputSourceAccNum] = useState('')
+    const [inputSourceAccNum, setInputSourceAccNum] = useState(AccountNumber)
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [showTransferList, setShowTransferList] = useState(false);
+
+    sessionStorage.setItem("transferSourceAccount", inputSourceAccNum)
+    sessionStorage.setItem("transferDestinationeAccount", inputDestinationAccNum)
+    sessionStorage.setItem("transferAmmount", inputAmount)
+    sessionStorage.setItem("transferDescription", inputDescription)
 
     const transfer = () => {
         setShowModal(true);
@@ -39,9 +50,28 @@ function Transfer() {
     const openTransferList = () => {
         setShowTransferList(true);
     };
+
+    async function userTransfer() {
+        //input to database
+        const { error } = await supabaseAdmin.from("transfer").insert({
+            senderID: id,
+            senderAccNum: inputSourceAccNum,
+            Destination: inputDestinationAccNum,
+            Amount: inputAmount,
+            Description: inputDescription,
+        })
+        console.log("inputted")
+        alert("Transfer Successful")
+        navigate('/transaction');
+        if (error) {
+            //error will throw here
+            throw error;
+        }
+    }
+
     return (
         <div>
-            <Header/>
+            <Header />
             <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
                 <label htmlFor="source-account">Source Account</label>
                 <select onChange={handleSourceAccNum} className="form-select
@@ -59,7 +89,7 @@ function Transfer() {
       ease-in-out
       m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Select Account">
-                    <option selected value="123456789">123456789</option>
+                    <option selected value={AccountNumber}>{AccountNumber}</option>
                 </select>
 
                 <label htmlFor="destination_account">Destination Account</label>
@@ -76,22 +106,22 @@ function Transfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ">
-                <span className={"w-78"}>
-                <input className="form-control appearance-none outline-none
+                    <span className={"w-78"}>
+                        <input className="form-control appearance-none outline-none
         inline-block
         "
-                       type="text" id="destination_account" name="destinationAccount"
-                       onChange={handleDestinationAccNum}>
-                </input>
+                            type="text" id="destination_account" name="destinationAccount"
+                            onChange={handleDestinationAccNum}>
+                        </input>
                     </span>
                     <span>
-                    <button
-                        className="inline-block bg-none float-right"
-                        onClick={openTransferList}>
-                        <img className="h-6 object-centered m-auto"
-                             src={"https://img.icons8.com/material-two-tone/512/sorting-answers.png"}/>
-                    </button>
-                </span>
+                        <button
+                            className="inline-block bg-none float-right"
+                            onClick={openTransferList}>
+                            <img className="h-6 object-centered m-auto"
+                                src={"https://img.icons8.com/material-two-tone/512/sorting-answers.png"} />
+                        </button>
+                    </span>
                 </div>
 
                 <label htmlFor="amount">Amount (RM)</label>
@@ -111,8 +141,8 @@ function Transfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" id="amount" name="amount"
-                       onChange={handleAmount}></input>
+                    type="text" id="amount" name="amount"
+                    onChange={handleAmount}></input>
 
                 <label htmlFor="description">Description</label>
                 <input className="form-control
@@ -131,16 +161,16 @@ function Transfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" id="description" name="description"
-                       onChange={handleDescription}></input>
+                    type="text" id="description" name="description"
+                    onChange={handleDescription}></input>
 
                 <button
-                    onClick={transfer}
+                    onClick={userTransfer}
                     type="submit"
                     className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Transfer
                 </button>
 
-                <Modal showModal={showModal} setShowModal={setShowModal} type={"transfer"}/>
+                <Modal showModal={showModal} setShowModal={setShowModal} type={"transfer"} />
                 {showTransferList &&
                     <>
                         <div

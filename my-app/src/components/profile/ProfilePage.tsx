@@ -21,6 +21,7 @@ function ProfilePage() {
     var PhoneNumber = sessionStorage.getItem("PhoneNumber") || fallbackString;
     var Password = sessionStorage.getItem("Password") || fallbackString;
     var Pin = sessionStorage.getItem("Pin") || fallbackString;
+    var AccountNumber = sessionStorage.getItem("AccountNumber") || fallbackString;
 
 
     const [inputPassword, setinputPassword] = useState('')
@@ -111,7 +112,7 @@ function ProfilePage() {
                                 <label className="font-semibold text-gray-700 block pb-1">Account Number</label>
                                 <input disabled id="accountNumber" className="
         border-1  rounded px-4 py-2 w-full
-      " type="text" defaultValue="123456789" />
+      " type="text" defaultValue={AccountNumber} />
                             </div>
 
                             <div className="pb-4">
