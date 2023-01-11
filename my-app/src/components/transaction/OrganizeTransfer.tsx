@@ -53,6 +53,9 @@ function OrganizeTransfer() {
         const updatedList = categoryList.filter((item) => item !== category);
         setCategoryList(updatedList);
     };
+    const addToCategory = () => {
+
+    };
     return (
         <div>
             <Header/>
@@ -94,6 +97,9 @@ function OrganizeTransfer() {
                         >
                             <ul className={"flex flex-row justify-between"}>
                                 <h5>{item}</h5>
+                                <button onClick={addToCategory}>
+                                    <img className="h-6" src={"https://img.icons8.com/material-outlined/512/plus-math.png"}></img>
+                                </button>
                                 <button onClick={()=>deleteCategory(item)}>
                                     <img className="h-6" src={"https://img.icons8.com/windows/512/trash.png"}></img>
                                 </button>
