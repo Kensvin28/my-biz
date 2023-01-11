@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 function Company() {
-    const [entity, setEntity] = useState('');
-    const [status, setStatus] = useState('');
+    const [entity, setEntity] = useState("Sole Proprietor");
+    const [status, setStatus] = useState("Micro");
+    const [natureofBusiness, setnatureofBusiness] = useState("")
+    const [numberOfStaff, setnumberOfStaff] = useState("")
 
     const entityChange = (e: any) => {
         setEntity(e.target.value);
@@ -12,25 +14,38 @@ function Company() {
         setStatus(e.target.value);
     }
 
+    const natureOfBusinessChange = (e: any) => {
+        setnatureofBusiness(e.target.value);
+    }
+
+    const numberOfStaffChange = (e: any) => {
+        setnumberOfStaff(e.target.value);
+    }
+
+    sessionStorage.setItem("loanEntity", entity)
+    sessionStorage.setItem("loanStatus", status)
+    sessionStorage.setItem("loanNatureOfBusiness", natureofBusiness)
+    sessionStorage.setItem("loanNumberOfStaff", numberOfStaff)
+
     return (
         <div>
             <div>
                 <p>Entity Type</p>
                 <div>
                     <input defaultChecked className="mr-2" type="radio" id="sole_proprietor" name="entity_type" value="Sole Proprietor"
-                           onChange={entityChange}></input>
+                        onChange={entityChange}></input>
                     <label htmlFor="sole_proprietor">Sole Proprietor</label>
                 </div>
 
                 <div>
                     <input className="mr-2" type="radio" id="partnership" name="entity_type"
-                           value="Partnership" onChange={entityChange}></input>
+                        value="Partnership" onChange={entityChange}></input>
                     <label htmlFor="partnership">Partnership</label>
                 </div>
 
                 <div>
                     <input className="mr-2" type="radio" id="private_limited" name="entity_type"
-                           value="Private Limited" onChange={entityChange}></input>
+                        value="Private Limited" onChange={entityChange}></input>
                     <label htmlFor="private_limited">Private Limited</label>
                 </div>
             </div>
@@ -39,7 +54,7 @@ function Company() {
                 <p>Corporate Status</p>
                 <div>
                     <input defaultChecked className="mr-2" type="radio" id="micro" name="status" value="Micro"
-                           onChange={statusChange}></input>
+                        onChange={statusChange}></input>
                     <label htmlFor="micro">Micro</label>
                 </div>
 
@@ -61,6 +76,7 @@ function Company() {
 
             <label htmlFor="business_nature">Nature of Business</label>
             <input
+                onChange={natureOfBusinessChange}
                 type="text"
                 className="
         form-control
@@ -85,6 +101,7 @@ function Company() {
 
             <label htmlFor="staff">Number of Staff</label>
             <input
+                onChange={numberOfStaffChange}
                 type="text"
                 className="
         form-control
@@ -105,7 +122,7 @@ function Company() {
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
                 id="staff"
-                placeholder=""/>
+                placeholder="" />
 
             <input className="mr-2" type="checkbox" id="save_info" name="company_info" value="true"></input>
             <label htmlFor="save_info">Save company info</label>
