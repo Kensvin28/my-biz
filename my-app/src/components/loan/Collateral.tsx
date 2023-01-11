@@ -1,14 +1,22 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 function Collateral() {
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState("Fixed Deposit");
+    const [valueRM, setValue] = useState("")
+
+    const valueChange = (e: any) => {
+        setValue(e.target.value);
+    }
+
+    sessionStorage.setItem("loanCollateral", status)
+    sessionStorage.setItem("loanValue", valueRM)
 
     return (
         <div>
             <p>Collateral</p>
             <div>
-            <select
-                className="form-select form-select-sm
+                <select
+                    className="form-select form-select-sm
     block
     px-2
     py-1
@@ -22,18 +30,19 @@ function Collateral() {
     ease-in-out
     m-0
     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-            >
-                <option value="Fixed Deposit">Fixed Deposit</option>
-                <option value="Property">Property</option>
-                <option value="Government Guarantee">Government Guarantee</option>
-            </select>
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                >
+                    <option value="Fixed Deposit">Fixed Deposit</option>
+                    <option value="Property">Property</option>
+                    <option value="Government Guarantee">Government Guarantee</option>
+                </select>
             </div>
 
             <label htmlFor="value">Value (RM)</label>
             <input
-                type="text"
+                onChange={valueChange}
+                type="number"
                 className="
         form-control
         block

@@ -7,6 +7,7 @@ import Collateral from "./Collateral";
 import Financing from "./Financing";
 import Company from "./Company";
 import {useNavigate} from "react-router-dom";
+import { supabaseAdmin } from '../../supabase';
 
 //https://www.rhbgroup.com/files/business/financing/business-loan/BizPower_SME_Financing_Application_Form_.pdf
 
@@ -37,8 +38,28 @@ function ApplyLoanPage() {
             default:
         }
     };
+    
+    const fallbackString = 'Default';
+    async function addtodatabase(){
+        const { error } = await supabaseAdmin.from("companyloan").insert({
+            companyId:sessionStorage.getItem("id") || fallbackString,
+            entityType:sessionStorage.getItem("loanEntity") || fallbackString,
+            purpose:sessionStorage.getItem("loanPurpose") || fallbackString,
+            corporateStatus:sessionStorage.getItem("loanStatus") || fallbackString,
+            value:sessionStorage.getItem("loanValue") || fallbackString,
+            collateral:sessionStorage.getItem("loanCollateral") || fallbackString,
+            staffnumber:sessionStorage.getItem("loanNumberOfStaff") || fallbackString,
+            numberOfBusiness:sessionStorage.getItem("loanNatureOfBusiness") || fallbackString,
+            documentLink:sessionStorage.getItem("loanDocs") || fallbackString,
+        })
+        if (error) {
+            //error will throw here
+            throw error;
+        }
+        console.log("inputted")
+    }   
 
-    const handleClick = (direction: any) => {
+    const handleClick = async (direction: any) => {
         let newStep = currentStep;
 
         direction === "next" ? newStep++ : newStep--;
@@ -46,6 +67,9 @@ function ApplyLoanPage() {
         newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
         // submit
         if(newStep > steps.length){
+            
+            //input to database
+            await addtodatabase();
             navigate("/loan");
         }
     };
