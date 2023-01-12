@@ -46,7 +46,7 @@ function TransactionHistory() {
                         <th className="w-1/6">ID</th>
                         <th className="w-1/4">Date</th>
                         <th className="w-1/4">Amount</th>
-                        <th className="w-1/3">Recipient</th>
+                        <th className="w-1/3">Account Number</th>
                         <th className="w-1/3">Description</th>
                         </tr>
                     </thead>
@@ -58,7 +58,9 @@ function TransactionHistory() {
                                 <td id="history_data_id">{detail.transferid}</td>
                                 <td id="history_data_date">{detail.created_at.slice(0,10)}</td>
                                 <td className="text-red-600" id="history_data_amount">-RM {detail.Amount}</td>
+                                <td id="history_data_description">{detail.Destination}</td>
                                 <td id="history_data_recipient">{detail.Description}</td>
+
                             </tr>
                         )}):<></>}
                         
