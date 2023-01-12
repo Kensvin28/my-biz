@@ -8,7 +8,10 @@ import TextField from '@mui/material/TextField';
 import TransferList from "./TransferList";
 
 function ScheduleTransfer() {
-    const [inputSourceAccNum, setInputSourceAccNum] = useState('')
+    var AccountNumber = sessionStorage.getItem("AccountNumber") || "Default";
+    var id = sessionStorage.getItem("id") || "Default";
+
+    const [inputSourceAccNum, setInputSourceAccNum] = useState(AccountNumber)
     const [inputDestinationAccNum, setInputDestinationAccNum] = useState('')
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
@@ -20,10 +23,7 @@ function ScheduleTransfer() {
         setShowTransferList(true);
     };
 
-    var AccountNumber = sessionStorage.getItem("AccountNumber") || "Default";
     const navigate = useNavigate();
-
-    var id = sessionStorage.getItem("id") || "Default";
 
     const handleDescription = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDescription(event.target.value);
