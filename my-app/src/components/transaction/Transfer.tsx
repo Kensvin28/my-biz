@@ -59,6 +59,7 @@ function Transfer() {
             Destination: inputDestinationAccNum,
             Amount: inputAmount,
             Description: inputDescription,
+            isScheduled: "no",
         })
         console.log("inputted")
         alert("Transfer Successful")

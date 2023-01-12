@@ -12,8 +12,7 @@ function ScheduleTransfer() {
     const [inputDestinationAccNum, setInputDestinationAccNum] = useState('')
     const [inputAmount, setInputAmount] = useState('')
     const [inputDescription, setInputDescription] = useState('')
-    const [inputDate, setinputDate] = useState('')
-    const [inputTime, setinputTime] = useState('')
+    const [inputDateTime, setinputDateTime] = useState('')
     const [showModal, setShowModal] = React.useState(false)
     const [showTransferList, setShowTransferList] = useState(false);
 
@@ -25,10 +24,6 @@ function ScheduleTransfer() {
     const navigate = useNavigate();
 
     var id = sessionStorage.getItem("id") || "Default";
-
-    const currentDate = new Date();
-    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-    const nextDate = new Date(currentDate.getTime() + oneDayInMilliseconds).toISOString().slice(0, 10);
 
     const handleDescription = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDescription(event.target.value);
@@ -61,14 +56,9 @@ function ScheduleTransfer() {
         console.log('source: ', inputSourceAccNum);
     };
 
-    const handleDate = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setinputDate(event.target.value);
-        console.log('date: ', inputDate);
-    };
-
-    const handleTime = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setinputTime(event.target.value);
-        console.log('time: ', inputTime);
+    const handleDateTime = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setinputDateTime(event.target.value);
+        console.log('date: ', inputDateTime);
     };
 
     const openFavourites = () => {
@@ -84,8 +74,7 @@ function ScheduleTransfer() {
             Amount: inputAmount,
             Description: inputDescription,
             isScheduled: "yes",
-            scheduleTime: inputTime,
-            scheduleDate: inputDate,
+            scheduleDate: inputDateTime,
         })
         console.log("inputted")
         alert("Scheduled Transfer Successfully Recorded")
@@ -194,6 +183,7 @@ function ScheduleTransfer() {
                     onChange={handleDescription}></input>
 
                 <TextField
+                    onChange={handleDateTime}
                     id="datetime-local"
                     label="Schedule at"
                     type="datetime-local"
