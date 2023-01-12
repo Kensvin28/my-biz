@@ -3,7 +3,15 @@ import { supabaseAdmin } from '../../supabase';
 import Header from '../Header';
 
 interface transaction{
-
+    transferid:number;
+    created_at: string;
+    senderID:number;
+    senderAccNum:number;
+    Amount:string;
+    Description:string;
+    Destination:string;
+    isScheduled:string;
+    scheduleDate:string;
 }
 
 function TransactionHistory() {
@@ -16,7 +24,8 @@ function TransactionHistory() {
         .eq('senderID', sessionStorage.getItem("id"))
         .then(({ data, error }) => {
         if (!error) {
-            // setTransactiondata(data)
+            // console.log(typeof data[0].scheduleDate)
+            setTransactiondata(data)
         }
         }) }, [])
     
@@ -37,22 +46,22 @@ function TransactionHistory() {
                         <th className="w-1/6">ID</th>
                         <th className="w-1/4">Date</th>
                         <th className="w-1/4">Amount</th>
-                        <th className="w-1/3">Recipient</th>
+                        <th className="w-1/3">Discription</th>
                         </tr>
                     </thead>
 
                     <tbody className="text-center" id="transaction_history_table_body">
                         {transactionsdata? transactionsdata.map((detail, index)=>
                         {return (
-                            <tr>
-                                <td id="history_data_id">00001</td>
-                                <td id="history_data_date">11/01/2023</td>
-                                <td className="text-red-600" id="history_data_amount">-RM 570.00</td>
-                                <td id="history_data_recipient">Alun Company</td>
+                            <tr key={index}>
+                                <td id="history_data_id">{detail.transferid}</td>
+                                <td id="history_data_date">{detail.created_at.slice(0,10)}</td>
+                                <td className="text-red-600" id="history_data_amount">-RM {detail.Amount}</td>
+                                <td id="history_data_recipient">{detail.Description}</td>
                             </tr>
                         )}):<></>}
                         
-                        <tr>
+                        {/* <tr>
                         <td id="history_data_id">00001</td>
                         <td id="history_data_date">11/01/2023</td>
                         <td className="text-red-600" id="history_data_amount">-RM 570.00</td>
@@ -71,7 +80,7 @@ function TransactionHistory() {
                         <td id="history_data_date">05/01/2023</td>
                         <td id="history_data_amount" className="text-red-600">-RM 340.00</td>
                         <td id="history_data_recipient">Awen Company</td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                     </table>
             </div>
