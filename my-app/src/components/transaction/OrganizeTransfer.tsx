@@ -1,53 +1,68 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "../Header";
+import OrganizeTransferList from "./OrganizeTransferList";
 // @ts-ignore
 // import { Draggable, Droppable } from 'react-drag-and-drop';
 
 type Item = {
     name: string,
-    account: number,
-    category: string
+    account: string
+}
+
+type Category = {
+    name: string,
+    items: Array<Item> | null
+}
+
+type TransferList = {
+    name: string,
+    categories: Array<Category>
 }
 
 function OrganizeTransfer() {
     const [dragItem, setDragItem]: any = useState();
-    const [categoryList, setCategoryList] = useState([
-        "Food Supplier",
-        "Utensil Supplier",
-        "Rent",
-        "Others"
-    ]);
-    const list = [
-        {name: "Anda", account: 123819128, category: "Food Supplier"},
-        {name: "Elu", account: 123819129, category: "Utensil Supplier"},
-        {name: "Maneh", account: 123819121, category: "Rent"},
-        {name: "Dan", account: 123819122, category: "Others"},
-        {name: "Lain", account: 123819123, category: "Others"}
-    ];
+    const list = {
+        name: "categoryList",
+        categories:[
+            {
+                name: "Food Supplier",
+                items: [
+                    {
+                        name: "Anda",
+                        account: "123819128"
+                    },
+                ]
+            },
+            {
+                name: "Utensil Supplier",
+                items: [
+                    {
+                        name: "Dan",
+                        account: "123819129"
+                    },
+                    {
+                        name: "Lein",
+                        account: "123819123"
+                    },
+                ]
+            },
+            {
+                name: "Rent",
+                items: [
 
-    const [inputCategory, setInputCategory] = useState(list);
+                ]
+            }
 
-    const categorizedData = list.reduce((acc: any, current) => {
-        const { name, account, category } = current;
+        ]
+    }
 
-        if (!acc[category]) {
-            acc[category] = {
-                items: [],
-            };
-        }
-        acc[category].items.push(name);
 
-        return acc;
-    }, {});
+    const [inputCategory, setInputCategory] = useState('');
+    const [inputName, setInputName] = useState('');
+    const [inputAccount, setInputAccount] = useState('');
 
-    console.log(categorizedData);
-
-    Object.keys(categorizedData).map((key, index: number) => {
-        console.log(`Category: ${key}`);
-        categorizedData[key].items.map((item: Item, index: number) =>
-            console.log(`Item ${index}: ${item}`)
-        );
-    });
+    const [displayList, setDisplayList] = useState(list);
+    const [inputDestinationCategory, setDestinationCategory] = useState("");
 
     const handleDragStart = (index: number) => {
         setDragItem(index);
@@ -55,12 +70,14 @@ function OrganizeTransfer() {
 
     const handleDragEnter = (e: any, index: number) => {
         e.target.style.backgroundColor = "LightGray";
-        const newList = [...categoryList];
-        const item = newList[dragItem];
-        newList.splice(dragItem, 1);
-        newList.splice(index, 0, item);
+        const newList = list;
+        const newCategories = list.categories;
+        const item = newCategories[dragItem];
+        newCategories.splice(dragItem, 1);
+        newCategories.splice(index, 0, item);
         setDragItem(index);
-        setCategoryList(newList);
+        newList.categories = newCategories;
+        setDisplayList(newList);
     };
 
     const handleDragLeave = (e: React.DragEvent<HTMLLIElement>) => {
@@ -73,30 +90,98 @@ function OrganizeTransfer() {
         element.style.backgroundColor = "white";
     };
 
+    // useEffect(() => {
+    //     return () => {
+    //         setDisplayList(list)
+    //         console.log("Running")
+    //     };
+    // }, [JSON.stringify(list)]);
 
-    // const handleAddition = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-    //     setInputCategory(event.target.value);
-    // }
+    const addCategory = (inputCategory: string) => {
+        const newCategory = {
+            name: inputCategory,
+            items: [
 
-    const addCategory = (inputCategory: any) => {
-        setCategoryList((state) => [
-            ...state,
-            inputCategory
-        ]);
-        console.log(categoryList);
+            ]
+        }
+        setDisplayList((state) =>
+            (
+                {
+                    ...state,
+                    categories: [
+                        ...state.categories,
+                        newCategory
+                    ]
+                }
+            )
+        )
+        // console.log(displayList)
     }
 
-    const deleteCategory = (category: string) => {
-        const updatedList = categoryList.filter((item) => item !== category);
-        setCategoryList(updatedList);
-    };
-    const addToCategory = () => {
+    const addToCategory = (name: string, account: string, category: string) => {
+        const newItem = {
+            name: name,
+            account: account
+        }
 
+        try {
+            displayList.categories
+                .filter((listCategory) =>
+                    listCategory.name === category)[0].items.push(newItem);
+            setDisplayList(displayList);
+        } catch(err){
+            console.log("Bad request")
+        }
     };
+
+    const handleInputCategory = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setInputCategory(event.target.value);
+    };
+    const handleName = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setInputName(event.target.value);
+    };
+    const handleAccount = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+        setInputAccount(event.target.value);
+    };
+
     return (
         <div>
             <Header/>
+            <div className={"flex space-x-2 p-1.5 justify-center"}>
             <input className="form-control
+        inline-block
+        w-60
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   type="text" id="category" name="category" onChange={handleInputCategory}
+            />
+            <button
+                onClick={() => addCategory(inputCategory)}
+                type="submit"
+                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
+                Category
+            </button>
+            </div>
+
+            <OrganizeTransferList
+                transferList={displayList}
+            >
+            </OrganizeTransferList>
+
+            <div className="flex flex-col mt-4 p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
+                <h5><b>Add Favorite</b></h5>
+                <label htmlFor="name">Name</label>
+                <input className="form-control
         inline-block
         w-80
         px-3
@@ -112,43 +197,57 @@ function OrganizeTransfer() {
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   type="text" id="category" name="category"
-                   />
-            <button
-                onClick={() => addCategory(inputCategory)}
-                type="submit"
-                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
-                Category
-            </button>
-            <ul className="dnd">
-                {categoryList &&
-                    categoryList.map((item, index) => (
-                        <li
-                            draggable
-                            className={"p-6 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}
-                            key={index}
-                            onDragStart={() => handleDragStart(index)}
-                            onDragEnter={(e) => handleDragEnter(e, index)}
-                            onDragLeave={(e) => handleDragLeave(e)}
-                            onDrop={(e) => handleDrop(e)}
-                            onDragOver={(e) => e.preventDefault()}
-                        >
-                            <ul className={"flex flex-row justify-between"}>
-                                <h5>{item}</h5>
-                                <div>
-                                    <button onClick={addToCategory}>
-                                        <img className="h-6"
-                                             src={"https://img.icons8.com/material-outlined/512/plus-math.png"}></img>
-                                    </button>
-                                    <button onClick={() => deleteCategory(item)}>
-                                        <img className="h-6" src={"https://img.icons8.com/windows/512/trash.png"}></img>
-                                    </button>
-                                </div>
-                            </ul>
-                        </li>
-                    ))}
-            </ul>
-        </div>
+                       type="text" id="name" name="name" onChange={handleName}
+                />
+                <label htmlFor="account">Account</label>
+                <input className="form-control
+        inline-block
+        w-80
+        px-3
+        py-1.5
+        my-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                       type="text" id="account" name="account" onChange={handleAccount}
+                />
+                <select
+                    className="form-select form-select-sm
+    inline-block
+    w-80
+    px-3
+    py-1.5
+    my-1.5
+    text-sm
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300
+    rounded
+    transition
+    ease-in-out
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example"
+                    onChange={(e) => setDestinationCategory(e.target.value)}
+                >
+                    {displayList.categories.map((category) =>
+                        <option value={category.name}>{category.name}</option>
+                    )}
+                </select>
+                <button
+                    onClick={() => addToCategory(inputName, inputAccount, inputDestinationCategory)}
+                    type="submit"
+                    className="inline-block mt-2 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                    Add
+                </button>
+            </div>
+         </div>
     );
 }
 

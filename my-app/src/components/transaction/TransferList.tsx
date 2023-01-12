@@ -14,36 +14,44 @@ type Item = {
 
 function TransferList(props: Props) {
     const state = {...props};
-    const [categoryList, setCategoryList] = useState([
-        "Food Supplier",
-        "Utensil Supplier",
-        "Rent",
-        "Others"
-    ]);
-    const list = [
-        {name: "Anda", account: 123819128, category: "Food Supplier"},
-        {name: "Elu", account: 123819129, category: "Utensil Supplier"},
-        {name: "Maneh", account: 123819121, category: "Rent"},
-        {name: "Dan", account: 123819122, category: "Others"},
-        {name: "Lain", account: 123819123, category: "Others"}
-    ];
+    const list = {
+        name: "categoryList",
+        categories:[
+            {
+                name: "Food Supplier",
+                items: [
+                    {
+                        name: "Anda",
+                        account: "123819128"
+                    },
+                ]
+            },
+            {
+                name: "Utensil Supplier",
+                items: [
+                    {
+                        name: "Dan",
+                        account: "123819129"
+                    },
+                    {
+                        name: "Lein",
+                        account: "123819123"
+                    },
+                ]
+            },
+            {
+                name: "Rent",
+                items: [
+
+                ]
+            }
+
+        ]
+    }
 
     //https://stackoverflow.com/a/69749252
     const [inputCategory, setInputCategory] = useState(list);
-    const categorizedData = list.reduce((acc: any, current) => {
-        const {name, account, category} = current;
-
-        if (!acc[category]) {
-            acc[category] = {
-                items: [],
-            };
-        }
-        acc[category].items.push({name, account});
-
-        return acc;
-    }, {});
-
-    console.log(categorizedData);
+    const [displayList, setDisplayList] = useState(list);
     const handleItemClick = (account: string) => {
         state.selectedDestination(account);
         state.setShowModal(false);
@@ -51,16 +59,26 @@ function TransferList(props: Props) {
 
     return (
         <div className="flex flex-col p-3 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
-            {Object.keys(categorizedData).map((key) => (
+            {displayList.categories.map((category, index) => (
                 <React.Fragment>
-                    <div className={"p-2 border-gray-400"}>
-                        <b>{`Category: ${key}`}</b>
+                    <div className={"flex justify-between pl-2 pr-2 py-2 border-gray-400"}>
+                        <b>{`Category: ${category.name}`}</b>
                     </div>
+
                     <ul className="dnd">
-                        {categorizedData[key].items.map((item: Item, index: number) => (
+                        {category.items?.map((item, index) => (
+                            (item.name !== null) &&
                             <li
-                                className={"p-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}
+                                // draggable
+                                className={"flex flex-row p-6 pr-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}
+                                key={index}
+                                // onDragStart={() => handleDragStart(index)}
+                                // onDragEnter={(e) => handleDragEnter(e, index)}
+                                // onDragLeave={(e) => handleDragLeave(e)}
+                                // onDrop={(e) => handleDrop(e)}
+                                // onDragOver={(e) => e.preventDefault()}
                             >
+
                                 <button className="flex justify-between w-full" onClick={() => handleItemClick(item.account)}>
                                     <span>
                                         {`${item.name}`}
@@ -70,10 +88,34 @@ function TransferList(props: Props) {
                                     </span>
                                 </button>
                             </li>
-                            ))}
+
+                        ))}
                     </ul>
                 </React.Fragment>
             ))}
+            {/*{Object.keys(categorizedData).map((key) => (*/}
+            {/*    <React.Fragment>*/}
+            {/*        <div className={"p-2 border-gray-400"}>*/}
+            {/*            <b>{`Category: ${key}`}</b>*/}
+            {/*        </div>*/}
+            {/*        <ul className="dnd">*/}
+            {/*            {categorizedData[key].items.map((item: Item, index: number) => (*/}
+            {/*                <li*/}
+            {/*                    className={"p-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}*/}
+            {/*                >*/}
+            {/*                    <button className="flex justify-between w-full" onClick={() => handleItemClick(item.account)}>*/}
+            {/*                        <span>*/}
+            {/*                            {`${item.name}`}*/}
+            {/*                        </span>*/}
+            {/*                        <span>*/}
+            {/*                            {`${item.account}`}*/}
+            {/*                        </span>*/}
+            {/*                    </button>*/}
+            {/*                </li>*/}
+            {/*                ))}*/}
+            {/*        </ul>*/}
+            {/*    </React.Fragment>*/}
+            {/*))}*/}
         </div>
     );
 }
