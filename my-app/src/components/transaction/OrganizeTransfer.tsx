@@ -3,14 +3,51 @@ import Header from "../Header";
 // @ts-ignore
 // import { Draggable, Droppable } from 'react-drag-and-drop';
 
+type Item = {
+    name: string,
+    account: number,
+    category: string
+}
+
 function OrganizeTransfer() {
     const [dragItem, setDragItem]: any = useState();
     const [categoryList, setCategoryList] = useState([
         "Food Supplier",
         "Utensil Supplier",
-        "Rent"
+        "Rent",
+        "Others"
     ]);
-    const [inputCategory, setInputCategory] = useState('');
+    const list = [
+        {name: "Anda", account: 123819128, category: "Food Supplier"},
+        {name: "Elu", account: 123819129, category: "Utensil Supplier"},
+        {name: "Maneh", account: 123819121, category: "Rent"},
+        {name: "Dan", account: 123819122, category: "Others"},
+        {name: "Lain", account: 123819123, category: "Others"}
+    ];
+
+    const [inputCategory, setInputCategory] = useState(list);
+
+    const categorizedData = list.reduce((acc: any, current) => {
+        const { name, account, category } = current;
+
+        if (!acc[category]) {
+            acc[category] = {
+                items: [],
+            };
+        }
+        acc[category].items.push(name);
+
+        return acc;
+    }, {});
+
+    console.log(categorizedData);
+
+    Object.keys(categorizedData).map((key, index: number) => {
+        console.log(`Category: ${key}`);
+        categorizedData[key].items.map((item: Item, index: number) =>
+            console.log(`Item ${index}: ${item}`)
+        );
+    });
 
     const handleDragStart = (index: number) => {
         setDragItem(index);
@@ -37,12 +74,12 @@ function OrganizeTransfer() {
     };
 
 
-    const handleAddition = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-        setInputCategory(event.target.value);
-    }
+    // const handleAddition = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    //     setInputCategory(event.target.value);
+    // }
 
     const addCategory = (inputCategory: any) => {
-        setCategoryList((state)=>[
+        setCategoryList((state) => [
             ...state,
             inputCategory
         ]);
@@ -76,11 +113,12 @@ function OrganizeTransfer() {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                    type="text" id="category" name="category"
-                   onChange={handleAddition}/>
+                   />
             <button
-                onClick={()=>addCategory(inputCategory)}
+                onClick={() => addCategory(inputCategory)}
                 type="submit"
-                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add Category
+                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
+                Category
             </button>
             <ul className="dnd">
                 {categoryList &&
@@ -97,12 +135,15 @@ function OrganizeTransfer() {
                         >
                             <ul className={"flex flex-row justify-between"}>
                                 <h5>{item}</h5>
-                                <button onClick={addToCategory}>
-                                    <img className="h-6" src={"https://img.icons8.com/material-outlined/512/plus-math.png"}></img>
-                                </button>
-                                <button onClick={()=>deleteCategory(item)}>
-                                    <img className="h-6" src={"https://img.icons8.com/windows/512/trash.png"}></img>
-                                </button>
+                                <div>
+                                    <button onClick={addToCategory}>
+                                        <img className="h-6"
+                                             src={"https://img.icons8.com/material-outlined/512/plus-math.png"}></img>
+                                    </button>
+                                    <button onClick={() => deleteCategory(item)}>
+                                        <img className="h-6" src={"https://img.icons8.com/windows/512/trash.png"}></img>
+                                    </button>
+                                </div>
                             </ul>
                         </li>
                     ))}
