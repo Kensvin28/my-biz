@@ -27,13 +27,15 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
     const [dragCategory, setDragCategory] = useState<any>();
     const [displayList, setDisplayList] = useState(transferList);
 
-    // useEffect(() => {
-    //     setDisplayList(transferList)
-    //     console.log("running")
-    // }, [JSON.stringify(transferList)]);
+    useEffect(() => {
+        setDisplayList(transferList)
+        console.log("running")
+    }, [transferList]);
 
-    const deleteCategory = (category: Category) => {
-        const targetCategories = transferList.categories.filter((item) => item.name !== category.name);
+    const deleteCategory = (inputCategory: Category) => {
+        const targetCategories = transferList.categories
+            .filter((item) => item.name !== inputCategory.name);
+        //delete from front end
         setDisplayList((prevState) =>
             (
                 {
@@ -42,16 +44,41 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                 }
             )
         )
+
+        //delete from backend
+        transferList.categories.map((category, categoryIndex) => {
+            if(category.name === inputCategory.name) {
+                delete transferList.categories[categoryIndex]
+            }
+        })
     }
 
-    const deleteItem = (transferDestination: Item) => {
+    const deleteItem = (transferDestination: string, categoryIndex: number) => {
+        const targetItem = transferList.categories[categoryIndex].items.filter((item) =>
+                    item.account !== transferDestination
+            );
 
-        transferList.categories.map((category) => {
-                category.items.filter((item) =>
-                    item.account !== transferDestination.account)
+        transferList.categories.map((category, categoryIndex) => {
+                category.items.map((item, itemIndex) => {
+                    if(item.account === transferDestination) {
+                        delete transferList.categories[categoryIndex].items[itemIndex]
+                        setDisplayList((prevState) =>
+                            (
+                                {
+                                    ...prevState,
+                                    categories: [
+                                        ...prevState.categories
+                                    ]
+                                }
+                            )
+                        )
+                        console.log(transferList)
+                        return transferList
+                    }
+                }
+            )
             }
         );
-        setDisplayList(transferList)
     };
 
     const handleDragStart = (index: number) => {
@@ -80,22 +107,15 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
         element.style.backgroundColor = "white";
     };
 
-    // useEffect(() => {
-    //     return () => {
-    //         setDisplayList(list)
-    //         console.log("Running")
-    //     };
-    // }, [JSON.stringify(list)]);
-
     return (
         <div className="flex flex-col p-3 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
-            {displayList.categories.map((category, index) => (
+            {displayList.categories.map((category, categoryIndex) => (
                 <React.Fragment>
                     <div className={"flex justify-between pl-2 pr-2 py-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}
-                         key={index}
+                         key={categoryIndex}
                          draggable
-                         onDragStart={() => handleDragStart(index)}
-                         onDragEnter={(e) => handleDragEnter(e, index)}
+                         onDragStart={() => handleDragStart(categoryIndex)}
+                         onDragEnter={(e) => handleDragEnter(e, categoryIndex)}
                          onDragLeave={(e) => handleDragLeave(e)}
                          onDrop={(e) => handleDrop(e)}
                          onDragOver={(e) => e.preventDefault()}
@@ -130,7 +150,7 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                                         </span>
                                 </div>
                                 <div className={""}>
-                                    <button onClick={() => deleteItem(item)}>
+                                    <button onClick={() => deleteItem(item.account, categoryIndex)}>
                                         <img className="h-6"
                                              src={"https://img.icons8.com/windows/512/trash.png"}></img>
                                     </button>

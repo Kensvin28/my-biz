@@ -55,13 +55,19 @@ function OrganizeTransfer() {
         ]
     }
 
-
     const [inputCategory, setInputCategory] = useState('');
     const [inputName, setInputName] = useState('');
     const [inputAccount, setInputAccount] = useState('');
 
     const [displayList, setDisplayList] = useState(list);
     const [inputDestinationCategory, setDestinationCategory] = useState("");
+
+    useEffect(() => {
+        return () => {
+            setDisplayList(list)
+            console.log("Running")
+        };
+    }, [JSON.stringify(list)]);
 
     const addCategory = (inputCategory: string) => {
         const newCategory = {
@@ -70,6 +76,7 @@ function OrganizeTransfer() {
 
             ]
         }
+        list.categories.push(newCategory)
         setDisplayList((state) =>
             (
                 {
@@ -81,20 +88,28 @@ function OrganizeTransfer() {
                 }
             )
         )
-        // console.log(displayList)
+        console.log(list)
+        console.log(displayList)
     }
 
-    const addToCategory = (name: string, account: string, category: string) => {
+    const addToCategory = (name: string, account: string, inputCategory: string) => {
         const newItem = {
             name: name,
             account: account
         }
 
         try {
-            displayList.categories
+            list.categories
                 .filter((listCategory) =>
-                    listCategory.name === category)[0].items.push(newItem);
-            setDisplayList(displayList);
+                    listCategory.name === inputCategory)[0].items.push(newItem);
+            // list.categories.map((category) => {
+            //         if (category.name === inputCategory) {
+            //             category.items.push(newItem)
+            //         }
+            //     }
+            // );
+            console.log(list)
+            setDisplayList(list);
         } catch(err){
             console.log("Bad request")
         }
@@ -140,7 +155,8 @@ function OrganizeTransfer() {
             </div>
 
             <OrganizeTransferList
-                transferList={displayList}
+                key={"transferList"}
+                transferList={list}
             >
             </OrganizeTransferList>
 
