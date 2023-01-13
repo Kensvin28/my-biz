@@ -137,9 +137,9 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                          onDrop={(e) => handleDrop(e)}
                          onDragOver={(e) => e.preventDefault()}
                     >
-                        <b>{`Category: ${category.name}`}</b>
+                        <b>{`${category.name}`}</b>
                         <button className="" onClick={() => deleteCategory(category)}>
-                            <img className="h-6"
+                            <img className="h-6 object-cover"
                                  src={"https://img.icons8.com/windows/512/trash.png"}></img>
                         </button>
                     </div>
@@ -148,7 +148,7 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                         {category.items?.map((item, index) => (
                             (item.name !== null) &&
                             <li
-                                className={"flex flex-row p-6 pr-2 border-gray-400"}
+                                className={"flex flex-row p-4 pr-3 border-gray-400"}
                                 key={index}
                                 // draggable
                                 // onDragStart={() => handleDragStart(index)}
@@ -168,7 +168,7 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                                 </div>
                                 <div className={""}>
                                     <button onClick={() => deleteItem(item.account, categoryIndex)}>
-                                        <img className="h-6"
+                                        <img className="h-6 object-cover"
                                              src={"https://img.icons8.com/windows/512/trash.png"}></img>
                                     </button>
                                 </div>

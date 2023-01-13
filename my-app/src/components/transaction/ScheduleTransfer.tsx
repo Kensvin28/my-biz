@@ -84,7 +84,7 @@ function ScheduleTransfer() {
     return (
         <div>
             <Header loggedIn={true}/>
-            <div className='flex flex-row rounded-r-lg shadow-lg max-w-xl2 w-3/5 mx-auto justify-center'>
+            <div className='flex flex-row space-x-6 rounded-r-lg max-w-xl2 w-3/5 mx-auto justify-center'>
                 <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
 
                     <label htmlFor="source-account">Source Account</label>
@@ -219,13 +219,13 @@ function ScheduleTransfer() {
                 </div>
 
                 <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-lg w-full mx-auto justify-center">
-                <p className="font-bold">Pending Scheduled Transfer</p>
+                    <p className="font-bold">Pending Scheduled Transfer</p>
                     <div>
                         <div className="ml-2 my-2 block p-6 rounded-lg shadow-lg bg-white max-w-sm">
                             <p id="transfer_id"><b>Transfer ID: </b>00001</p>
                             <p id="source_acc"><b>Source Account: </b>SA-567121367160</p>
                             <p id="destination_acc"><b>Destination Account: Alun Company Sdn Bhd</b></p>
-                            <p id="amount"><b>Amount: </b>Amount: RM 300</p>
+                            <p id="amount"><b>Amount: </b>RM 300</p>
                             <p id="description"><b>Description: </b>Logistics Payment</p>
                             <p id="schedule"><b>Transfer Schedule: </b>14/01/2022, 15:00</p>
                         </div>

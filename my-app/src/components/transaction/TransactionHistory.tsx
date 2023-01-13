@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabaseAdmin } from '../../supabase';
+import BalanceCard from '../dashboard/BalanceCard';
 import Header from '../Header';
 
 interface transaction{
@@ -33,7 +34,8 @@ function TransactionHistory() {
     return (
         <div>
             <Header loggedIn={true}/>
-            <div className="block p-8 rounded-xl shadow-xl bg-white w-3/4 max-w-xl mx-auto">
+            <BalanceCard />
+            <div className="m-4 block p-8 rounded-xl shadow-xl bg-white w-3/4 max-w-xl mx-auto">
                 <div className="w-6/7 sm:p-2 m-4 lg:p-4 m-4 bg-white shadow-md">
                     <div className="flex justify-between">
                         <span className="text-xl font-semibold">Transaction History</span>

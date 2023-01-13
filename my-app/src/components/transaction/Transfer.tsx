@@ -65,6 +65,10 @@ function Transfer() {
         }
     }
 
+    const handleEdit = () => {
+        navigate("/organize-transfer");
+    }
+
     return (
         <div>
             <Header loggedIn={true}/>
@@ -173,6 +177,11 @@ function Transfer() {
                             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                         >
                             <div className="relative w-auto my-6 mx-auto max-w-3xl bg-white">
+                                <button
+                                    className="float-left text-blue-500 background-transparent px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => handleEdit()}
+                                >Edit</button>
                                 <button
                                     className="float-right text-red-500 background-transparent px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button"
