@@ -23,14 +23,23 @@ interface Props {
 }
 
 const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, children}) => {
-    const [dragItem, setDragItem] = useState<Item>();
+    const [dragItem, setDragItem] = useState<any>();
     const [dragCategory, setDragCategory] = useState<any>();
     const [displayList, setDisplayList] = useState(transferList);
 
-    useEffect(() => {
-        setDisplayList(transferList)
-        console.log("running")
-    }, [transferList]);
+    // useEffect(() => {
+    //     setDisplayList(transferList)
+    //     console.log("running")
+    // }, [transferList]);
+
+    useEffect(
+        () => {
+            setDragCategory(1)
+            setDisplayList(transferList)
+            console.log("Dragging")
+        },
+        [transferList]
+    )
 
     const deleteCategory = (inputCategory: Category) => {
         const targetCategories = transferList.categories
@@ -86,23 +95,38 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
     };
 
     const handleDragEnter = (e: any, index: number) => {
-        e.target.style.backgroundColor = "LightGray";
-        const newList = transferList;
-        const newCategories = transferList.categories;
-        const item = newCategories[dragCategory];
-        newCategories.splice(dragCategory, 1);
-        newCategories.splice(index, 0, item);
-        setDragCategory(index);
-        newList.categories = newCategories;
-        setDisplayList(newList);
+        try {
+            e.target.style.backgroundColor = "LightGray";
+            const newList = transferList;
+            const newCategories = transferList.categories;
+            const item = newCategories[dragCategory];
+            newCategories.splice(dragCategory, 1);
+            newCategories.splice(index, 0, item);
+            setDragCategory(index);
+            newList.categories = newCategories;
+            setDisplayList(newList);
+        } catch (err){
+            console.log(err)
+        }
     };
+    // const handleDragEnterItem = (e: any, categoryIndex: number, index: number) => {
+    //     e.target.style.backgroundColor = "LightGray";
+    //     const newList = transferList;
+    //     const newItem = transferList.categories[categoryIndex].items;
+    //     const item = newItem[dragItem];
+    //     newItem.splice(dragItem, 1);
+    //     newItem.splice(index, 0, item);
+    //     setDragCategory(index);
+    //     newList.categories[categoryIndex].items = newItem;
+    //     setDisplayList(newList);
+    // }
 
-    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>|React.DragEvent<HTMLLIElement>) => {
         const element = e.target as HTMLLIElement;
         element.style.backgroundColor = "white";
     };
 
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>|React.DragEvent<HTMLLIElement>) => {
         const element = e.target as HTMLLIElement;
         element.style.backgroundColor = "white";
     };
@@ -132,10 +156,10 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                             (item.name !== null) &&
                             <li
                                 className={"flex flex-row p-6 pr-2 border-gray-400"}
-                                // key={index}
+                                key={index}
                                 // draggable
                                 // onDragStart={() => handleDragStart(index)}
-                                // onDragEnter={(e) => handleDragEnter(e, index)}
+                                // onDragEnter={(e) => handleDragEnterItem(e, categoryIndex, index)}
                                 // onDragLeave={(e) => handleDragLeave(e)}
                                 // onDrop={(e) => handleDrop(e)}
                                 // onDragOver={(e) => e.preventDefault()}

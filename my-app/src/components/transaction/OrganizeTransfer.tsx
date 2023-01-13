@@ -62,12 +62,12 @@ function OrganizeTransfer() {
     const [displayList, setDisplayList] = useState(list);
     const [inputDestinationCategory, setDestinationCategory] = useState("");
 
-    useEffect(() => {
-        return () => {
-            setDisplayList(list)
-            console.log("Running")
-        };
-    }, [JSON.stringify(list)]);
+    // useEffect(() => {
+    //     return () => {
+    //         setDisplayList(list)
+    //         console.log("Running")
+    //     };
+    // }, [list]);
 
     const addCategory = (inputCategory: string) => {
         const newCategory = {
@@ -76,7 +76,6 @@ function OrganizeTransfer() {
 
             ]
         }
-        list.categories.push(newCategory)
         setDisplayList((state) =>
             (
                 {
@@ -88,6 +87,7 @@ function OrganizeTransfer() {
                 }
             )
         )
+        list.categories.push(newCategory)
         console.log(list)
         console.log(displayList)
     }
@@ -127,7 +127,7 @@ function OrganizeTransfer() {
 
     return (
         <div>
-            <Header/>
+            <Header loggedIn={true}/>
             <div className={"flex space-x-2 p-1.5 justify-center"}>
             <input className="form-control
         inline-block
@@ -155,8 +155,8 @@ function OrganizeTransfer() {
             </div>
 
             <OrganizeTransferList
-                key={"transferList"}
-                transferList={list}
+                key={"displayList"}
+                transferList={displayList}
             >
             </OrganizeTransferList>
 
