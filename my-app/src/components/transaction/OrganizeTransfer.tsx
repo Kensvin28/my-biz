@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Header from "../Header";
 import OrganizeTransferList from "./OrganizeTransferList";
 // @ts-ignore
@@ -12,11 +12,6 @@ type Item = {
 type Category = {
     name: string,
     items: Array<Item> | null
-}
-
-type TransferList = {
-    name: string,
-    categories: Array<Category>
 }
 
 function OrganizeTransfer() {

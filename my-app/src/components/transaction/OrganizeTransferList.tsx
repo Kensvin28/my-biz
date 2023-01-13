@@ -1,6 +1,4 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from 'react';
-import {ThemeProvider} from "@material-tailwind/react";
-import children = ThemeProvider.propTypes.children;
 
 type Item = {
     name: string,
@@ -10,11 +8,6 @@ type Item = {
 type Category = {
     name: string,
     items: Array<Item> | null
-}
-
-type TransferList = {
-    name: string,
-    categories: Array<Category>
 }
 
 interface Props {
@@ -63,9 +56,9 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
     }
 
     const deleteItem = (transferDestination: string, categoryIndex: number) => {
-        const targetItem = transferList.categories[categoryIndex].items.filter((item) =>
-                    item.account !== transferDestination
-            );
+        // const targetItem = transferList.categories[categoryIndex].items.filter((item) =>
+        //             item.account !== transferDestination
+        //     );
 
         transferList.categories.map((category, categoryIndex) => {
                 category.items.map((item, itemIndex) => {

@@ -17,11 +17,6 @@ function Transfer() {
     const [showModal, setShowModal] = useState(false)
     const [showTransferList, setShowTransferList] = useState(false)
 
-    const transfer = () => {
-        setShowModal(true);
-        console.log('Transferred Successfully!');
-    };
-
     const handleDestinationAccNum = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setInputDestinationAccNum(event.target.value);
         console.log('destination:', inputDestinationAccNum);

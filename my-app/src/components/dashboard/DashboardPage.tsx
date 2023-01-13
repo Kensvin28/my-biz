@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../Header';
 import Card from "./Card";
 import {Link} from "react-router-dom";
-import {LoginProvider} from "../LoginContextProvider";
 import BalanceCard from "./BalanceCard";
 
 function DashboardPage() {

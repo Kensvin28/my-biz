@@ -61,10 +61,6 @@ function ScheduleTransfer() {
         console.log('date: ', inputDateTime);
     };
 
-    const openFavourites = () => {
-
-    };
-
     async function userTransferScheduled() {
         //input to database
         const { error } = await supabaseAdmin.from("transfer").insert({

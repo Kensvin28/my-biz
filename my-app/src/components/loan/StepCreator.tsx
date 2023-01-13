@@ -20,11 +20,10 @@ export function UseContextProvider({ children }: any) {
     );
 }
 
-function useStepperContext() {
-    const { userData, setUserData } = useContext(StepperContext);
-
-    return { userData, setUserData };
-}
+// function useStepperContext() {
+//     const { userData, setUserData } = useContext(StepperContext);
+//     return { userData, setUserData };
+// }
 
 export function StepperControl({ handleClick, currentStep, steps }: StepperParameters) {
     return (

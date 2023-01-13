@@ -6,12 +6,6 @@ type Props = {
     selectedDestination: (account: string) => void;
 }
 
-type Item = {
-    name: string,
-    account: string,
-    category: string
-}
-
 function TransferList(props: Props) {
     const state = {...props};
     const list = {
@@ -49,8 +43,6 @@ function TransferList(props: Props) {
         ]
     }
 
-    //https://stackoverflow.com/a/69749252
-    const [inputCategory, setInputCategory] = useState(list);
     const [displayList, setDisplayList] = useState(list);
     const handleItemClick = (account: string) => {
         state.selectedDestination(account);

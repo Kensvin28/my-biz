@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRef } from 'react';
 import { Link } from "react-router-dom";
 import { supabaseAdmin } from '../../supabase';
 import Header from "../Header";
@@ -76,7 +75,7 @@ function RegisterPage() {
             .select()
             .eq('CompanyName', inputCompName)
 
-        if (data?.length != 0) {
+        if (data?.length !== 0) {
             alert("Company Name Already Used")
             console.log(data)
             return false
@@ -96,7 +95,7 @@ function RegisterPage() {
             .select()
             .eq('BusinessRegNumber', inputBusinessNum)
 
-        if (data?.length != 0) {
+        if (data?.length !== 0) {
             alert("Business Registration Number Already Used!")
             console.log(data)
             return false
@@ -122,7 +121,7 @@ function RegisterPage() {
             .select()
             .eq('AccountNumber', accountNumberRandom)
 
-        if (data?.length != 0) {
+        if (data?.length !== 0) {
             alert("Business Registration Number Already Used!")
             console.log(data)
             generateAccountNumber()
@@ -138,13 +137,13 @@ function RegisterPage() {
 
     async function userRegister() {
         //check availability
-        if (await checkAvailabilityCompany() == false || await checkAvailabilityNumber() == false || await checkAvailabilityAccount() == false) {
+        if (!await checkAvailabilityCompany() || !await checkAvailabilityNumber() || !await checkAvailabilityAccount()) {
             console.log("error")
             return;
         }
 
         //check pass and pin
-        if (!(inputPassword == inputConfPassword && inputPin == inputConfPin)) {
+        if (!(inputPassword === inputConfPassword && inputPin === inputConfPin)) {
             alert("Incorrect password and/or Pin")
             console.log("different password and/or Pin")
             return;

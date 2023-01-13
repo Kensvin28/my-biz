@@ -51,7 +51,7 @@ function ProfilePage() {
 
     //update password
     async function updatePassword() {
-        if (inputPassword == inputConfPassword) {
+        if (inputPassword === inputConfPassword) {
             const { error } = await supabaseAdmin
                 .from('companies')
                 .update({ Password: inputPassword })
@@ -70,7 +70,7 @@ function ProfilePage() {
 
     //update password
     async function updatePin() {
-        if (inputPin == inputConfPin) {
+        if (inputPin === inputConfPin) {
             const { error } = await supabaseAdmin
                 .from('companies')
                 .update({ PIN: inputPin })

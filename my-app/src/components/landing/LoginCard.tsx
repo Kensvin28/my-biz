@@ -1,8 +1,5 @@
-import React, { useContext, useState } from 'react';
-import Header from "../Header";
-import { Outlet, Navigate, useNavigate } from 'react-router-dom';
-import { LoginContext } from "../LoginContextProvider";
-import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabaseAdmin } from '../../supabase';
 interface Props {
     setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,7 +32,7 @@ const LoginCard = ({setLoggedIn}: Props) => {
             .eq('CompanyName', inputCompName)
             .eq('Password', inputPassword)
 
-        if (data?.length != 0) {
+        if (data?.length !== 0) {
             console.log("success")
             console.log(data![0].id);
 
@@ -64,7 +61,7 @@ const LoginCard = ({setLoggedIn}: Props) => {
             navigate('/dashboard');
 
         }
-        else if (data?.length == 0) {
+        else if (data?.length === 0) {
             alert("Wrong Company Name or Password")
             console.log("no success")
             console.log(data);

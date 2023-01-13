@@ -1,5 +1,5 @@
-import React, { createRef, MutableRefObject, ReactInstance, useRef } from 'react';
-import ReactToPrint, { useReactToPrint } from 'react-to-print';
+import React, { createRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import Header from "../Header";
 
 function QrPage() {

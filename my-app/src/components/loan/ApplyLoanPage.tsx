@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Header from "../Header";
 import {Stepper, StepperControl, UseContextProvider} from "./StepCreator";
 import Documents from "./Documents";

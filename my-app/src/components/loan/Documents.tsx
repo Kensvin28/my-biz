@@ -67,7 +67,7 @@ function FileUpload() {
                     sessionStorage.setItem("loanDocs", JSON.stringify(imagelinks))
                 } else if (error) {
                     console.log(error);
-                }};     
+                }}
     }
 
     // store url to the local session
