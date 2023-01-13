@@ -20,7 +20,6 @@ type TransferList = {
 }
 
 function OrganizeTransfer() {
-    const [dragItem, setDragItem]: any = useState();
     const list = {
         name: "categoryList",
         categories:[
@@ -63,39 +62,6 @@ function OrganizeTransfer() {
 
     const [displayList, setDisplayList] = useState(list);
     const [inputDestinationCategory, setDestinationCategory] = useState("");
-
-    const handleDragStart = (index: number) => {
-        setDragItem(index);
-    };
-
-    const handleDragEnter = (e: any, index: number) => {
-        e.target.style.backgroundColor = "LightGray";
-        const newList = list;
-        const newCategories = list.categories;
-        const item = newCategories[dragItem];
-        newCategories.splice(dragItem, 1);
-        newCategories.splice(index, 0, item);
-        setDragItem(index);
-        newList.categories = newCategories;
-        setDisplayList(newList);
-    };
-
-    const handleDragLeave = (e: React.DragEvent<HTMLLIElement>) => {
-        const element = e.target as HTMLLIElement;
-        element.style.backgroundColor = "white";
-    };
-
-    const handleDrop = (e: React.DragEvent<HTMLLIElement>) => {
-        const element = e.target as HTMLLIElement;
-        element.style.backgroundColor = "white";
-    };
-
-    // useEffect(() => {
-    //     return () => {
-    //         setDisplayList(list)
-    //         console.log("Running")
-    //     };
-    // }, [JSON.stringify(list)]);
 
     const addCategory = (inputCategory: string) => {
         const newCategory = {

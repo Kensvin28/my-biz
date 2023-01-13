@@ -23,6 +23,8 @@ interface Props {
 }
 
 const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, children}) => {
+    const [dragItem, setDragItem] = useState<Item>();
+    const [dragCategory, setDragCategory] = useState<any>();
     const [displayList, setDisplayList] = useState(transferList);
 
     // useEffect(() => {
@@ -52,11 +54,52 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
         setDisplayList(transferList)
     };
 
+    const handleDragStart = (index: number) => {
+        setDragCategory(index);
+    };
+
+    const handleDragEnter = (e: any, index: number) => {
+        e.target.style.backgroundColor = "LightGray";
+        const newList = transferList;
+        const newCategories = transferList.categories;
+        const item = newCategories[dragCategory];
+        newCategories.splice(dragCategory, 1);
+        newCategories.splice(index, 0, item);
+        setDragCategory(index);
+        newList.categories = newCategories;
+        setDisplayList(newList);
+    };
+
+    const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+        const element = e.target as HTMLLIElement;
+        element.style.backgroundColor = "white";
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+        const element = e.target as HTMLLIElement;
+        element.style.backgroundColor = "white";
+    };
+
+    // useEffect(() => {
+    //     return () => {
+    //         setDisplayList(list)
+    //         console.log("Running")
+    //     };
+    // }, [JSON.stringify(list)]);
+
     return (
         <div className="flex flex-col p-3 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
             {displayList.categories.map((category, index) => (
                 <React.Fragment>
-                    <div className={"flex justify-between pl-2 pr-2 py-2 border-gray-400"}>
+                    <div className={"flex justify-between pl-2 pr-2 py-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}
+                         key={index}
+                         draggable
+                         onDragStart={() => handleDragStart(index)}
+                         onDragEnter={(e) => handleDragEnter(e, index)}
+                         onDragLeave={(e) => handleDragLeave(e)}
+                         onDrop={(e) => handleDrop(e)}
+                         onDragOver={(e) => e.preventDefault()}
+                    >
                         <b>{`Category: ${category.name}`}</b>
                         <button className="" onClick={() => deleteCategory(category)}>
                             <img className="h-6"
@@ -68,9 +111,9 @@ const OrganizeTransferList: FC<PropsWithChildren<Props>> = ({transferList, child
                         {category.items?.map((item, index) => (
                             (item.name !== null) &&
                             <li
+                                className={"flex flex-row p-6 pr-2 border-gray-400"}
+                                // key={index}
                                 // draggable
-                                className={"flex flex-row p-6 pr-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}
-                                key={index}
                                 // onDragStart={() => handleDragStart(index)}
                                 // onDragEnter={(e) => handleDragEnter(e, index)}
                                 // onDragLeave={(e) => handleDragLeave(e)}
