@@ -11,7 +11,7 @@ function DashboardPage() {
             {/*<LoginProvider>*/}
             {/*    <Header/>*/}
             {/*</LoginProvider>*/}
-            <Header/>
+            <Header loggedIn={true}/>
             {/*icons from: https://icons8.com/*/}
             <BalanceCard/>
             <div className="flex flex-row justify-center">

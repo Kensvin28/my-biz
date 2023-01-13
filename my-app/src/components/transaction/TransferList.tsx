@@ -93,29 +93,6 @@ function TransferList(props: Props) {
                     </ul>
                 </React.Fragment>
             ))}
-            {/*{Object.keys(categorizedData).map((key) => (*/}
-            {/*    <React.Fragment>*/}
-            {/*        <div className={"p-2 border-gray-400"}>*/}
-            {/*            <b>{`Category: ${key}`}</b>*/}
-            {/*        </div>*/}
-            {/*        <ul className="dnd">*/}
-            {/*            {categorizedData[key].items.map((item: Item, index: number) => (*/}
-            {/*                <li*/}
-            {/*                    className={"p-2 border-gray-400 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-800"}*/}
-            {/*                >*/}
-            {/*                    <button className="flex justify-between w-full" onClick={() => handleItemClick(item.account)}>*/}
-            {/*                        <span>*/}
-            {/*                            {`${item.name}`}*/}
-            {/*                        </span>*/}
-            {/*                        <span>*/}
-            {/*                            {`${item.account}`}*/}
-            {/*                        </span>*/}
-            {/*                    </button>*/}
-            {/*                </li>*/}
-            {/*                ))}*/}
-            {/*        </ul>*/}
-            {/*    </React.Fragment>*/}
-            {/*))}*/}
         </div>
     );
 }

@@ -72,7 +72,7 @@ function Transfer() {
 
     return (
         <div>
-            <Header />
+            <Header loggedIn={true}/>
             <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
                 <label htmlFor="source-account">Source Account</label>
                 <select onChange={handleSourceAccNum} className="form-select

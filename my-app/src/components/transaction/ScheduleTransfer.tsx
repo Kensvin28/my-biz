@@ -87,7 +87,7 @@ function ScheduleTransfer() {
 
     return (
         <div>
-            <Header />
+            <Header loggedIn={true}/>
             <div className='flex flex-row rounded-r-lg shadow-lg max-w-xl2 w-3/5 mx-auto justify-center'>
                 <div className="flex flex-col p-6 rounded-r-lg shadow-lg max-w-sm w-full mx-auto justify-center">
 

@@ -4,9 +4,11 @@ import {
     IconButton,
 } from "@material-tailwind/react";
 import {Link} from "react-router-dom";
-
+interface Props {
+    loggedIn: boolean;
+}
 //https://www.material-tailwind.com/docs/react/navbar
-export default function Example() {
+export default function Header({loggedIn}: Props) {
     const [openNav, setOpenNav] = useState(false);
 
     useEffect(() => {
@@ -75,6 +77,7 @@ export default function Example() {
                     </Link>
                     <div className="hidden">{navList}</div>
                     {/*hamburger icon*/}
+                    {loggedIn &&
                     <IconButton
                         variant="text"
                         className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent"
@@ -112,6 +115,7 @@ export default function Example() {
                             </svg>
                         )}
                     </IconButton>
+                    }
                 </div>
                 {/*expander*/}
                 <MobileNav open={openNav}>

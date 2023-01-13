@@ -42,7 +42,7 @@ function LoanPage() {
 
     return (
         <div>
-            <Header/>
+            <Header loggedIn={true}/>
 
             <div className="block p-6 rounded-lg shadow-lg bg-white w-full">
             <p className="font-bold">Your Loan Applications</p>

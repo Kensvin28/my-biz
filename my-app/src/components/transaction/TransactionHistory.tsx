@@ -32,7 +32,7 @@ function TransactionHistory() {
 
     return (
         <div>
-            <Header/>
+            <Header loggedIn={true}/>
             <div className="block p-8 rounded-xl shadow-xl bg-white w-3/4 max-w-xl mx-auto">
                 <div className="w-6/7 sm:p-2 m-4 lg:p-4 m-4 bg-white shadow-md">
                     <div className="flex justify-between">

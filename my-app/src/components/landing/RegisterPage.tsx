@@ -172,7 +172,7 @@ function RegisterPage() {
     return (
         // https://tailwind-elements.com/docs/standard/components/cards/3
         <div>
-            <Header />
+            <Header loggedIn={true} />
             <div className="flex justify-center">
                 <div className="block p-6 rounded-lg shadow-lg bg-white w-max">
                     <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">Register</h5>

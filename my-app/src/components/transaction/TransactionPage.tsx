@@ -8,7 +8,7 @@ import Card from '../dashboard/Card';
 function TransactionPage() {
     return (
         <div>
-            <Header></Header>
+            <Header loggedIn={true}/>
             <BalanceCard/>
             <div className="mt-4 p-6 rounded-lg shadow-lg bg-white w-full">
             <div className="flex flex-row justify-center">

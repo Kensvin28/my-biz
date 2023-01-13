@@ -4,8 +4,11 @@ import { Outlet, Navigate, useNavigate } from 'react-router-dom';
 import { LoginContext } from "../LoginContextProvider";
 import axios from 'axios';
 import { supabaseAdmin } from '../../supabase';
+interface Props {
+    setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const LoginCard = () => {
+const LoginCard = ({setLoggedIn}: Props) => {
     const navigate = useNavigate();
     const [inputCompName, setInputCompName] = useState('')
     const [inputPassword, setInputPassword] = useState('')
@@ -57,6 +60,7 @@ const LoginCard = () => {
             sessionStorage.setItem("Pin", Pin)
             sessionStorage.setItem("AccountNumber", AccountNumber)
             //redirect
+            setLoggedIn(true);
             navigate('/dashboard');
 
         }

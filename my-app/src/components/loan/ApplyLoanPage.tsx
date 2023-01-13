@@ -76,7 +76,7 @@ function ApplyLoanPage() {
 
     return (
         <div>
-            <Header/>
+            <Header loggedIn={true}/>
             <div className="mx-auto rounded-2xl bg-white pb-2 shadow-xl md:w-3/4">
 
 

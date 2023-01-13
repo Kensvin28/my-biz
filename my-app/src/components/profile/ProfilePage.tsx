@@ -88,7 +88,7 @@ function ProfilePage() {
     return (
 
         <div>
-            <Header />
+            <Header loggedIn={true}/>
             {/*https://tailwindcomponents.com/component/profile-form*/}
             <div className="h-full my-2">
                 <div className="border-b-2 block md:flex">
